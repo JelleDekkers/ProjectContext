@@ -28,7 +28,6 @@ public class MainMenu : MonoBehaviour {
     private void OnGUI() {
         //network info:
         GUI.Label(new Rect(10, 10, 1000, 20), "Network reachability: " + Application.internetReachability);
-        GUI.Label(new Rect(10, 20, 1000, 20), "State: " + Player.GameState);
 
         serverCode = GUI.TextField(new Rect(320, 30, 100, 40), serverCode);
         if (GUI.Button(new Rect(10, 30, 300, 40), "Host Server")) 
@@ -97,6 +96,6 @@ public class MainMenu : MonoBehaviour {
         }
 
         Player.SaveName(playerName);
-        Player.SaveGender((Genders)playerGender);
+        Player.SaveGender((Gender)playerGender);
     }
 }

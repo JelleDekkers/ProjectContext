@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 
 public enum GameState {
-    ServerStart = -1, //waiting for teacher to trigger day 0 && teacher distributes random characters.
+    ServerStart = -1, //waiting for students to all join the game, triggering next day distributes characters to all connected players
     Day0 = 0, // introduction with character and game mechanics / waiting for teacher to trigger day 1
     Day1 = 1,
     Day2 = 2,
@@ -16,6 +16,9 @@ public enum GameState {
 
 public class GameManager : MonoBehaviour {
 
+    [SerializeField]
+    private Characters CharactersSheet;
+    [SerializeField]
     public List<PlayerData> allPlayers = new List<PlayerData>();
 
     private void Start() {
@@ -66,14 +69,14 @@ public class GameManager : MonoBehaviour {
     }
 
     private void ClientGUI() {
-        GUI.Label(new Rect(10, 50, 1000, 20), "Game State (Player): " + Player.GameState);
-
-        if (GUI.Button(new Rect(10, 100, 300, 40), "Disconnect from server"))
-            Quit();
-
         GUI.Label(new Rect(10, 60, 1000, 20), "Name: " + Player.Name);
-        GUI.Label(new Rect(10, 70, 1000, 20), "Gender: " + (Genders)Player.Gender);
+        GUI.Label(new Rect(10, 70, 1000, 20), "Gender: " + (Gender)Player.Gender);
         GUI.Label(new Rect(10, 80, 1000, 20), "Character ID: " + Player.CharacterID);
+        GUI.Label(new Rect(10, 90, 1000, 20), "Character Name: " + CharactersSheet.dataArray[Player.CharacterID].Name);
+
+
+        if (GUI.Button(new Rect(10, 120, 300, 40), "Disconnect from server"))
+            Quit();
     }
 
     private void OnConnectedToServer() {
@@ -139,7 +142,12 @@ public class GameManager : MonoBehaviour {
     }
 
     private void DistributeCharsAmongstPlayers() {
-        List<int> chars = new List<int>() { 0, 1, 2, 3, 4, 5, 6 };
+        List<int> chars = new List<int>();
+        foreach (CharactersData data in CharactersSheet.dataArray)
+            chars.Add(data.ID);
+        
+        //semi randomness maken
+
         for(int i = 0; i < Network.connections.Length; i++) {
             NetworkPlayer player = Network.connections[i];
             int rndIndex = Random.Range(0, chars.Count - 1);
@@ -148,9 +156,9 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    // voor individuele studenten die geen karakter hebben gekregen op dag 0
     private int GetRandomCharId() {
-        List<int> chars = new List<int>() { 0, 1, 2, 3, 4, 5, 6 };
-        int rndId = Random.Range(0, chars.Count);
+        int rndId = Random.Range(0, CharactersSheet.dataArray.Length);
         return rndId;
     }
 
@@ -163,8 +171,6 @@ public class GameManager : MonoBehaviour {
     [RPC]
     private void NextDayRPC(int newDayIndex) {
         //trigger new day on clients
-        Player.GameState = newDayIndex;
-        Player.SaveGameState(newDayIndex);
     }
 
     [RPC]

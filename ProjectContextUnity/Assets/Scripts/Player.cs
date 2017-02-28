@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Genders {
-    Man = 0,
-    Woman = 1
-}
-
 [System.Serializable]
 public static class Player {
 
@@ -15,14 +10,12 @@ public static class Player {
     public static string Name;
     public static int CharacterID = -1;
     public static int Gender;
-    public static int GameState = -1;
 
     private const string serverCodeKey = "serverCode";
     private const string idKey = "id";
     private const string nameKey = "name";
     private const string genderKey = "gender";
     private const string charKey = "charID";
-    private const string gameStateKey = "stateKey";
 
     public static void LoadData() {
         ServerCode = PlayerPrefs.GetString(serverCodeKey);
@@ -33,8 +26,6 @@ public static class Player {
             ID = PlayerPrefs.GetInt(idKey);
         if (PlayerPrefs.HasKey(charKey))
             CharacterID = PlayerPrefs.GetInt(charKey);
-        if (PlayerPrefs.HasKey(gameStateKey))
-            GameState = PlayerPrefs.GetInt(gameStateKey);
     }
 
     public static void SaveServerCode(string code) {
@@ -53,15 +44,7 @@ public static class Player {
         PlayerPrefs.SetInt(charKey, id);
     }
 
-    public static void SaveGender(Genders gender) {
+    public static void SaveGender(Gender gender) {
         PlayerPrefs.SetInt(genderKey, (int)gender);
-    }
-
-    public static void SaveGameState(GameState state) {
-        PlayerPrefs.SetInt(gameStateKey, (int)state);
-    }
-
-    public static void SaveGameState(int state) {
-        PlayerPrefs.SetInt(gameStateKey, state);
     }
 }
