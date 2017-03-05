@@ -115,24 +115,6 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets\QuickSheet\GDataPlugin\Editor\Google\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.Client">
-      <HintPath>Assets\QuickSheet\GDataPlugin\Editor\Google\Google.GData.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.Spreadsheets">
-      <HintPath>Assets\QuickSheet\GDataPlugin\Editor\Google\Google.GData.Spreadsheets.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>Assets\QuickSheet\ExcelPlugin\Editor\Library\NPOI.OpenXml4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.Documents">
-      <HintPath>Assets\QuickSheet\GDataPlugin\Editor\Google\Google.GData.Documents.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.Extensions">
-      <HintPath>Assets\QuickSheet\GDataPlugin\Editor\Google\Google.GData.Extensions.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>Assets\QuickSheet\ExcelPlugin\Editor\Library\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -142,11 +124,29 @@
     <Reference Include="NPOI.OOXML">
       <HintPath>Assets\QuickSheet\ExcelPlugin\Editor\Library\NPOI.OOXML.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>Assets\QuickSheet\ExcelPlugin\Editor\Library\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
       <HintPath>Assets\QuickSheet\ExcelPlugin\Editor\Library\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="Google.GData.AccessControl">
       <HintPath>Assets\QuickSheet\GDataPlugin\Editor\Google\Google.GData.AccessControl.DLL</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Client">
+      <HintPath>Assets\QuickSheet\GDataPlugin\Editor\Google\Google.GData.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Documents">
+      <HintPath>Assets\QuickSheet\GDataPlugin\Editor\Google\Google.GData.Documents.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Extensions">
+      <HintPath>Assets\QuickSheet\GDataPlugin\Editor\Google\Google.GData.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Spreadsheets">
+      <HintPath>Assets\QuickSheet\GDataPlugin\Editor\Google\Google.GData.Spreadsheets.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\QuickSheet\GDataPlugin\Editor\Google\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -54,6 +54,7 @@ public class NetworkManager : MonoBehaviour {
             if (timeOutTimer < TIME_OUT_TIMER_MAX)
                 timeOutTimer += Time.deltaTime;
             else {
+                PopupManager.Instance.ShowPopup("Error", "Connection timed out");
                 Debug.Log("Connection timed out");
                 Quit();
                 SceneManager.LoadScene("menu");

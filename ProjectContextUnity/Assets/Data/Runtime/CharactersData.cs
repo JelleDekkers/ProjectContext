@@ -35,6 +35,10 @@ public class CharactersData
   public Faith FAITH { get {return faith; } set { faith = value;} }
   
   [SerializeField]
+  int money;
+  public int Money { get {return money; } set { money = value;} }
+  
+  [SerializeField]
   string beroep
 ;
   public string Beroep
@@ -53,7 +57,7 @@ public class CharactersData
  = value;} }
   
   [SerializeField]
-  string status;
-  public string Status { get {return status; } set { status = value;} }
+  string backstory;
+  public string Backstory { get {return backstory; } set { backstory = value;} }
   
 }

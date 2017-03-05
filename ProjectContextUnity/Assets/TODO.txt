@@ -1,5 +1,11 @@
 DOING:
 
+game menu maken van dorp en button naar character info
+
+
+fungus bekijken, placeholder teksten per dag opzetten
+
+
 playerPrefs omzetten naar I/O en opslaan per server zodat de player meerdere servers kan joinen
 en docenten kunnen meerdere servers hebben
 
@@ -7,8 +13,9 @@ Host moet de player lijst opslaan zodat de host altijd een lijst van alle speler
 als playerID -1 is dan krijgt deze de allPlayerList Length als id terug die de speler opslaat
 
 
+text panels scrollbaar maken indien nodig
 
-message script opzetten met popup messages voor errors ipv prints
+village view maken met scrollen en draggen
 
 
 TODO:

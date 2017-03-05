@@ -29,15 +29,15 @@ public class MainMenu : MonoBehaviour {
         //network info:
         GUI.Label(new Rect(10, 10, 1000, 20), "Network reachability: " + Application.internetReachability);
 
-        serverCode = GUI.TextField(new Rect(320, 30, 100, 40), serverCode);
-        if (GUI.Button(new Rect(10, 30, 300, 40), "Host Server")) 
+        serverCode = GUI.TextField(new Rect(220, 30, 100, 40), serverCode);
+        if (GUI.Button(new Rect(10, 30, 200, 40), "Host Server")) 
             HostGame(serverCode);
 
-        clientCode = GUI.TextField(new Rect(320, 80, 100, 40), clientCode);
-        if (GUI.Button(new Rect(10, 80, 300, 40), "Connect to server"))
+        clientCode = GUI.TextField(new Rect(220, 80, 100, 40), clientCode);
+        if (GUI.Button(new Rect(10, 80, 200, 40), "Connect to server"))
             GetServers();
 
-        GUI.Label(new Rect(320, 130, 100, 40), "Servers found: " + serversFoundCount);
+        GUI.Label(new Rect(220, 130, 100, 40), "Servers found: " + serversFoundCount);
 
         // player info:
         GUI.Label(new Rect(10, 180, 300, 20), "Enter your name: ");
@@ -62,7 +62,7 @@ public class MainMenu : MonoBehaviour {
             NetworkManager.CreateServer();
             SceneManager.LoadScene("game");
         } else {
-            print("Connection Error, please enable Wifi to play.");
+            PopupManager.Instance.ShowPopup("Error", "Connection Error, please enable Wifi to play");
         }
     }
 
@@ -86,12 +86,12 @@ public class MainMenu : MonoBehaviour {
             }
         }
         UDPServerDiscovery.OnFinishedLookingForServers -= ConnectToServerByCode;
-        print("Error, No server found with corresponding code.");
+        PopupManager.Instance.ShowPopup("Error", "No server found with corresponding code");
     }
 
     private void SavePlayerInfo() {
         if(!Common.IsValidName(playerName)) {
-            print("enter a valid name");
+            PopupManager.Instance.ShowPopup("Error", "Please enter a valid name");
             return;
         }
 

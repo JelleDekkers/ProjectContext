@@ -99,9 +99,10 @@
     <Compile Include="Assets\QuickSheet\Runtime\Util\ConvertExt.cs" />
     <Compile Include="Assets\Scripts\Common.cs" />
     <Compile Include="Assets\Scripts\DataEnums.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Helper\CoroutineStarter.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Managers\CharacterSprites.cs" />
+    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Network\BluetoothManager.cs" />
     <Compile Include="Assets\Scripts\Network\INetwork.cs" />
     <Compile Include="Assets\Scripts\Network\LocalNetworkManager.cs" />
@@ -110,6 +111,10 @@
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerData.cs" />
     <Compile Include="Assets\Scripts\ServerData.cs" />
+    <Compile Include="Assets\Scripts\UI\CharacterView.cs" />
+    <Compile Include="Assets\Scripts\UI\Popup.cs" />
+    <Compile Include="Assets\Scripts\UI\PopupManager.cs" />
+    <Compile Include="Assets\Scripts\UI\ScreenManagement.cs" />
     <Compile Include="Assets\Scripts\spreadsheetTest.cs" />
   </ItemGroup>
   <ItemGroup>

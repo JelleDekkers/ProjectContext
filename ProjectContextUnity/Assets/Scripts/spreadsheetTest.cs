@@ -8,8 +8,7 @@ public class spreadsheetTest : MonoBehaviour {
 
 	void Start () {
         foreach(CharactersData d in data.dataArray) {
-            print(d.Name);
+            print(d.Name + ": " + d.Backstory);
         }
-	}
-	
+	}	
 }
