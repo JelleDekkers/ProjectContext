@@ -153,6 +153,7 @@ public class GameManager : MonoBehaviour {
             int rndIndex = Random.Range(0, chars.Count - 1);
             chars.RemoveAt(rndIndex);
             NetworkManager.networkView.RPC("AssignCharId", player, rndIndex);
+            NetworkManager.networkView.RPC("ShowCharacterView", player);
         }
     }
 
@@ -178,5 +179,10 @@ public class GameManager : MonoBehaviour {
         Player.CharacterID = charId;
         Player.SaveCharID(charId);
         // show character information screen
+    }
+    
+    [RPC]
+    private void ShowCharacterView() {
+        ScreenManagement.Instance.ShowCharacterView();
     }
 }

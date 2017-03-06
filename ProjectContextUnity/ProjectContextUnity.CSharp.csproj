@@ -100,9 +100,12 @@
     <Compile Include="Assets\Scripts\Common.cs" />
     <Compile Include="Assets\Scripts\DataEnums.cs" />
     <Compile Include="Assets\Scripts\Helper\CoroutineStarter.cs" />
+    <Compile Include="Assets\Scripts\House.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Managers\CharacterSprites.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\LoadingViewManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\VillageManager.cs" />
     <Compile Include="Assets\Scripts\Network\BluetoothManager.cs" />
     <Compile Include="Assets\Scripts\Network\INetwork.cs" />
     <Compile Include="Assets\Scripts\Network\LocalNetworkManager.cs" />
@@ -111,7 +114,9 @@
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerData.cs" />
     <Compile Include="Assets\Scripts\ServerData.cs" />
+    <Compile Include="Assets\Scripts\SpriteOutline.cs" />
     <Compile Include="Assets\Scripts\UI\CharacterView.cs" />
+    <Compile Include="Assets\Scripts\UI\HouseInfoPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Popup.cs" />
     <Compile Include="Assets\Scripts\UI\PopupManager.cs" />
     <Compile Include="Assets\Scripts\UI\ScreenManagement.cs" />
@@ -138,6 +143,8 @@
     <None Include="Assets\QuickSheet\GDataPlugin\Templates\Property.txt" />
     <None Include="Assets\QuickSheet\GDataPlugin\Templates\ScriptableObjectClass.txt" />
     <None Include="Assets\QuickSheet\GDataPlugin\Templates\ScriptableObjectEditorClass.txt" />
+    <None Include="Assets\Shaders\Outline Shader.shader" />
+    <None Include="Assets\Shaders\Outline Sprite.shader" />
     <None Include="Assets\TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

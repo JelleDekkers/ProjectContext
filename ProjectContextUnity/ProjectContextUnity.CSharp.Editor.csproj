@@ -227,6 +227,8 @@
     <None Include="Assets\QuickSheet\GDataPlugin\Templates\Property.txt" />
     <None Include="Assets\QuickSheet\GDataPlugin\Templates\ScriptableObjectClass.txt" />
     <None Include="Assets\QuickSheet\GDataPlugin\Templates\ScriptableObjectEditorClass.txt" />
+    <None Include="Assets\Shaders\Outline Shader.shader" />
+    <None Include="Assets\Shaders\Outline Sprite.shader" />
     <None Include="Assets\TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

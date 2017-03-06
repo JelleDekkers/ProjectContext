@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour {
 
         clientCode = GUI.TextField(new Rect(220, 80, 100, 40), clientCode);
         if (GUI.Button(new Rect(10, 80, 200, 40), "Connect to server"))
-            GetServers();
+            GetServersAndConnect();
 
         GUI.Label(new Rect(220, 130, 100, 40), "Servers found: " + serversFoundCount);
 
@@ -56,6 +56,8 @@ public class MainMenu : MonoBehaviour {
         //    return;
         //}
 
+        LoadingViewManager.Instance.Show("Starting Server");
+
         if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork) {
             ServerData.SaveServerCode(serverCode);
             NetworkManager.serverCode = serverCode;
@@ -66,8 +68,10 @@ public class MainMenu : MonoBehaviour {
         }
     }
 
-    private void GetServers() {
+    private void GetServersAndConnect() {
+        LoadingViewManager.Instance.Show("Joining Server");
         UDPServerDiscovery.SearchForServers();
+        UDPServerDiscovery.OnFinishedLookingForServers += LoadingViewManager.Instance.Hide;
         UDPServerDiscovery.OnFinishedLookingForServers += ConnectToServerByCode;
     }
 
@@ -79,12 +83,14 @@ public class MainMenu : MonoBehaviour {
         Player.SaveServerCode(clientCode);
         foreach (GameServer server in UDPServerDiscovery.foundLocalServers) {
             if (server.Code.ToLower() == clientCode.ToLower()) {
+                UDPServerDiscovery.OnFinishedLookingForServers -= LoadingViewManager.Instance.Hide;
                 UDPServerDiscovery.OnFinishedLookingForServers -= ConnectToServerByCode;
                 NetworkManager.ConnectToServer(server.IpAddress);
                 SceneManager.LoadScene("game");
                 return;
             }
         }
+        UDPServerDiscovery.OnFinishedLookingForServers -= LoadingViewManager.Instance.Hide;
         UDPServerDiscovery.OnFinishedLookingForServers -= ConnectToServerByCode;
         PopupManager.Instance.ShowPopup("Error", "No server found with corresponding code");
     }

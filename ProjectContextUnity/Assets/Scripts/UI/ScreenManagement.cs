@@ -8,6 +8,8 @@ public class ScreenManagement : MonoBehaviour {
     public static ScreenManagement Instance { get { return instance; } }
 
     [SerializeField]
+    private GameObject loadingView;
+    [SerializeField]
     private GameObject characterView;
     [SerializeField]
     private GameObject villageView;

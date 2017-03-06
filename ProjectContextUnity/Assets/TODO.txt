@@ -1,7 +1,9 @@
 DOING:
 
-game menu maken van dorp en button naar character info
+dorp maken, switchen van views
+klikken op huis met informatie: Straat + huis nr en bewoner
 
+distribueren van character kijken naar geslacht
 
 fungus bekijken, placeholder teksten per dag opzetten
 
