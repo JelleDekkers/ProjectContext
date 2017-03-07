@@ -1,17 +1,20 @@
-﻿[System.Serializable]
+﻿/// <summary>
+/// Player Data class that holds client information for the host
+/// </summary>
+[System.Serializable]
 public class PlayerData {
     
     /// <summary>
     /// The ID of the player
     /// </summary>
     public int ID;
-    
+
+    public string IpAddress;
+
     /// <summary>
     /// The real name of the player
     /// </summary>
     public string Name;
-
-    public string IpAddress;
 
     /// <summary>
     /// The ID of the assigned character in the characters sheet.

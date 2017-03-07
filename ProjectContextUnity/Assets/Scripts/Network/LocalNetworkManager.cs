@@ -37,7 +37,6 @@ public class LocalNetworkManager : INetwork {
     }
 
     public void OnFailedToConnect(NetworkConnectionError error) {
-        PopupManager.Instance.ShowPopup("Error", "Failed to connect, please try again");
         Debug.Log("Failed to connect to server: " + error);
     }
 
@@ -46,14 +45,16 @@ public class LocalNetworkManager : INetwork {
     }
 
     public void OnDisconnectedFromServer(NetworkDisconnection info) {
-        if (Network.isServer)
+        if (Network.isServer) {
             Debug.Log("Local server connection disconnected as host");
-        else
-            if (info == NetworkDisconnection.LostConnection) {
-            PopupManager.Instance.ShowPopup("Error", "Failed to connect, please try again");
-            Debug.Log("Lost connection to the server");
+            if(info == NetworkDisconnection.LostConnection)
+                PopupManager.Instance.ShowPopup("Error", "Connection lost, please try again");
         } else {
-            Debug.Log("Successfully diconnected from the server");
+            if (info == NetworkDisconnection.LostConnection) {
+                Debug.Log("Lost connection to the server");
+            } else {
+                Debug.Log("Successfully diconnected from the server");
+            }
         }
     }
 

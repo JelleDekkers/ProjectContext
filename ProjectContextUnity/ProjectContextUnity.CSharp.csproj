@@ -99,6 +99,9 @@
     <Compile Include="Assets\QuickSheet\Runtime\Util\ConvertExt.cs" />
     <Compile Include="Assets\Scripts\Common.cs" />
     <Compile Include="Assets\Scripts\DataEnums.cs" />
+    <Compile Include="Assets\Scripts\EventSystemInstance.cs" />
+    <Compile Include="Assets\Scripts\Formatter.cs" />
+    <Compile Include="Assets\Scripts\GamePrefs.cs" />
     <Compile Include="Assets\Scripts\Helper\CoroutineStarter.cs" />
     <Compile Include="Assets\Scripts\House.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />

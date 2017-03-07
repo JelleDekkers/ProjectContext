@@ -14,15 +14,14 @@ public class MainMenu : MonoBehaviour {
 
     private void Awake() {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        Player.LoadData();
-        ServerData.LoadData();
+        GamePrefs.LoadData();
     }
 
     private void Start() {
-        serverCode = ServerData.ServerCode;
-        clientCode = Player.ServerCode;
-        playerName = Player.Name;
-        playerGender = Player.Gender;
+        serverCode = GamePrefs.ServerCode;
+        clientCode = GamePrefs.ServerCode;
+        playerName = GamePrefs.Name;
+        playerGender = GamePrefs.Gender;
     }
 
     private void OnGUI() {
@@ -48,6 +47,10 @@ public class MainMenu : MonoBehaviour {
 
         if (GUI.Button(new Rect(10, 350, 200, 40), "Delete PlayerPrefs"))
             PlayerPrefs.DeleteAll();
+        if (GUI.Button(new Rect(10, 400, 200, 40), "Delete Player Data"))
+            Player.DeleteData();
+        if (GUI.Button(new Rect(10, 450, 200, 40), "Delete Server Data"))
+            Player.DeleteData();
     }
 
     public void HostGame(string code) {
@@ -59,7 +62,7 @@ public class MainMenu : MonoBehaviour {
         LoadingViewManager.Instance.Show("Starting Server");
 
         if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork) {
-            ServerData.SaveServerCode(serverCode);
+            GamePrefs.SaveServerCode(serverCode);
             NetworkManager.serverCode = serverCode;
             NetworkManager.CreateServer();
             SceneManager.LoadScene("game");
@@ -80,7 +83,7 @@ public class MainMenu : MonoBehaviour {
         //    print("Please enter a code");
         //    return;
         //}
-        Player.SaveServerCode(clientCode);
+        GamePrefs.SaveServerCode(clientCode);
         foreach (GameServer server in UDPServerDiscovery.foundLocalServers) {
             if (server.Code.ToLower() == clientCode.ToLower()) {
                 UDPServerDiscovery.OnFinishedLookingForServers -= LoadingViewManager.Instance.Hide;
@@ -101,7 +104,7 @@ public class MainMenu : MonoBehaviour {
             return;
         }
 
-        Player.SaveName(playerName);
-        Player.SaveGender((Gender)playerGender);
+        GamePrefs.SaveName(playerName);
+        GamePrefs.SaveGender((Gender)playerGender);
     }
 }

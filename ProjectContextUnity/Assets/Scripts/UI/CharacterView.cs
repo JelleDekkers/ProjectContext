@@ -17,7 +17,7 @@ public class CharacterView : MonoBehaviour {
     [SerializeField]
     private Text money;
 
-    private void Start() {
+    private void Awake() {
         instance = this;
         //SetCharacter()
     }

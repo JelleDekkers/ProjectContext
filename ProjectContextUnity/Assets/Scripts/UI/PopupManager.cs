@@ -18,4 +18,10 @@ public class PopupManager : MonoBehaviour {
         Popup msg = Instantiate(instance.popupPrefab) as Popup;
         msg.Init(title, info);
     }
+
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.Space)) {
+            ShowPopup("Test", "test");
+        }
+    }
 }

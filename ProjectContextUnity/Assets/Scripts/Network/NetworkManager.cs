@@ -54,10 +54,10 @@ public class NetworkManager : MonoBehaviour {
             if (timeOutTimer < TIME_OUT_TIMER_MAX)
                 timeOutTimer += Time.deltaTime;
             else {
-                PopupManager.Instance.ShowPopup("Error", "Connection timed out");
                 Debug.Log("Connection timed out");
                 Quit();
                 SceneManager.LoadScene("menu");
+                PopupManager.Instance.ShowPopup("Error", "Connection timed out");
             }
         }
     }
@@ -89,12 +89,15 @@ public class NetworkManager : MonoBehaviour {
         Debug.Log("Failed to connect to server, error info: " + error);
         network.OnFailedToConnect(error);
         SceneManager.LoadScene("menu");
+        PopupManager.Instance.ShowPopup("Error", "Failed to connect, please try again");
     }
 
     private void OnDisconnectedFromServer(NetworkDisconnection info) {
         Debug.Log("OnDisconnectedFromServer()");
         network.OnDisconnectedFromServer(info);
         SceneManager.LoadScene("menu");
+        if(!Network.isServer && info == NetworkDisconnection.LostConnection)
+            PopupManager.Instance.ShowPopup("Error", "Lost connection to the server, please try again");
     }
 
     private void OnPlayerDisconnected(NetworkPlayer player) {

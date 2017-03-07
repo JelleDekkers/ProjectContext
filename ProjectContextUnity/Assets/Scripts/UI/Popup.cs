@@ -7,6 +7,10 @@ public class Popup : MonoBehaviour {
     public Text info;
     public Button btn;
 
+    private void Awake() {
+        DontDestroyOnLoad(gameObject);
+    }
+
     public void Init(string title, string info) {
         this.title.text = title.ToString();
         this.info.text = info.ToString();

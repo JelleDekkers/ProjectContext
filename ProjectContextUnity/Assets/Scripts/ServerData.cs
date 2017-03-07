@@ -1,26 +1,47 @@
-﻿using System.Collections;
+﻿using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ServerData {
+/// <summary>
+/// Holds Server data and players
+/// </summary
+[System.Serializable]
+public class ServerData {
 
-    public static string ServerCode;
-    public static int GameState = -1;
+    public string Code;
+    public int GameState;// = -1;
+    public List<PlayerData> players; // = new List<PlayerData>();
 
-    private const string serverCodeKey = "serverCode";
-    private const string gameStateKey = "stateKey";
+    private static string fileName = "serverData";
+    private static string filePath = "/" + fileName + ".gd";
 
-    public static void LoadData() {
-        ServerCode = PlayerPrefs.GetString(serverCodeKey);
-        if(PlayerPrefs.HasKey(gameStateKey))
-            GameState = PlayerPrefs.GetInt(gameStateKey);
+    public void SaveData() {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + filePath);
+        formatter.Serialize(file, this);
+        file.Close();
+        Debug.Log("Done saving");
     }
 
-    public static void SaveServerCode(string code) {
-        PlayerPrefs.SetString(serverCodeKey, code);
+    public ServerData LoadData() {
+        if (FileExists()) {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + filePath, FileMode.Open);
+            ServerData data = (ServerData)formatter.Deserialize(file);
+            file.Close();
+            return data;
+        } else {
+            Debug.Log("Trying to load data but no data file found.");
+            return null;
+        }
     }
 
-    public static void SaveGameState(int state) {
-        PlayerPrefs.SetInt(gameStateKey, state);
+    public static void DeleteData() {
+        File.Delete(Application.persistentDataPath + filePath);
+    }
+
+    public static bool FileExists() {
+        return (File.Exists(Application.persistentDataPath + filePath));
     }
 }

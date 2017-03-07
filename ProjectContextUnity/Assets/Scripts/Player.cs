@@ -1,50 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 using UnityEngine;
 
+/// <summary>
+/// Holds player information for gameplay
+/// </summary>
 [System.Serializable]
-public static class Player {
+public class Player {
 
-    public static string ServerCode;
-    public static int ID = -1;
-    public static string Name;
-    public static int CharacterID = -1;
-    public static int Gender;
+    public string ServerCode;
+    public int ID = -1;
+    public int CharacterID = -1;
+    public string Name;
+    public int Gender;
 
-    private const string serverCodeKey = "serverCode";
-    private const string idKey = "id";
-    private const string nameKey = "name";
-    private const string genderKey = "gender";
-    private const string charKey = "charID";
+    private static string fileName = "gameData";
+    private static string filePath = "/" + fileName + ".gd";
 
-    public static void LoadData() {
-        ServerCode = PlayerPrefs.GetString(serverCodeKey);
-        Name = PlayerPrefs.GetString(nameKey);
-        Gender = PlayerPrefs.GetInt(genderKey);
-
-        if (PlayerPrefs.HasKey(idKey))
-            ID = PlayerPrefs.GetInt(idKey);
-        if (PlayerPrefs.HasKey(charKey))
-            CharacterID = PlayerPrefs.GetInt(charKey);
+    public void SaveData() {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + filePath);
+        formatter.Serialize(file, this);
+        file.Close();
+        Debug.Log("Done saving");
     }
 
-    public static void SaveServerCode(string code) {
-        PlayerPrefs.SetString(serverCodeKey, code);
+    public Player LoadData() {
+        if (FileExists()) {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + filePath, FileMode.Open);
+            Player data = (Player)formatter.Deserialize(file);
+            file.Close();
+            return data;
+        } else {
+            Debug.Log("Trying to load data but no data file found.");
+            return null;
+        }
     }
 
-    public static void SaveID(int id) {
-        PlayerPrefs.SetInt(idKey, id);
+    public static void DeleteData() {
+        File.Delete(Application.persistentDataPath + filePath);
     }
 
-    public static void SaveName(string name) {
-        PlayerPrefs.SetString(nameKey, name);
-    }
-
-    public static void SaveCharID(int id) {
-        PlayerPrefs.SetInt(charKey, id);
-    }
-
-    public static void SaveGender(Gender gender) {
-        PlayerPrefs.SetInt(genderKey, (int)gender);
+    public static bool FileExists() {
+        return (File.Exists(Application.persistentDataPath + filePath));
     }
 }
