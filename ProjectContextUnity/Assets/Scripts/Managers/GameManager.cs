@@ -44,10 +44,14 @@ public class GameManager : MonoBehaviour {
             server.SaveData();
         }
 
-        if (Network.isServer) 
+        if (Network.isServer) {
             NetworkManager.OnPlayerDisconnectedFromServer += RefreshPlayerList;
-        else 
+        } else {
             NetworkManager.OnConnectedToServerEvent += OnConnectedToServer;
+            print(player.CharacterID);
+            if (player.CharacterID == -1)
+                LoadingViewManager.Instance.Show("Wachten op docent");
+        }
     }
 
     private void Update() {
@@ -109,7 +113,7 @@ public class GameManager : MonoBehaviour {
 
     private void OnConnectedToServer() {
         if (!Network.isServer) 
-            NetworkManager.networkView.RPC("PlayerConnected", RPCMode.Server, player.ID, player.Name, player.CharacterID);
+            NetworkManager.networkView.RPC("PlayerConnected", RPCMode.Server, player.ID, player.Name, player.Gender, player.CharacterID);
         
         NetworkManager.OnConnectedToServerEvent -= OnConnectedToServer;
     }
@@ -151,11 +155,13 @@ public class GameManager : MonoBehaviour {
     }
 
     [RPC]
-    private void PlayerConnected(int id, string name, int charID) {
+    private void PlayerConnected(int id, string name, int gender, int charID) {
         NetworkPlayer networkPlayer = Network.connections[Network.connections.Length - 1];
         string ipAdress = networkPlayer.ipAddress;
+
+        // first time join:
         if (id == -1) {
-            PlayerData player = new PlayerData(ipAdress, id, name, charID);
+            PlayerData player = new PlayerData(id, ipAdress, name, gender, charID);
             player.ConnectionStatus = (int)ConnectionStatus.Online;
             int newId = server.players.Count;
             player.ID = newId;
@@ -196,19 +202,59 @@ public class GameManager : MonoBehaviour {
     }
 
     private void DistributeCharsAmongstPlayers() {
-        List<int> chars = new List<int>();
-        foreach (CharactersData data in CharactersSheet.dataArray)
-            chars.Add(data.ID);
-        
-        //semi randomness maken
+        List<int> availableChars = new List<int>();
+        List<int> distributedChars = new List<int>();
+        foreach (CharactersData c in CharactersSheet.dataArray)
+            availableChars.Add(c.ID);
+       
+        // assign character
+        for(int i = 0; i < server.players.Count; i++) {
+            PlayerData player = server.players[i];
+            if (player.ConnectionStatus == (int)ConnectionStatus.Offline)
+                continue;
 
-        for(int i = 0; i < Network.connections.Length; i++) {
-            NetworkPlayer player = Network.connections[i];
-            int rndIndex = Random.Range(0, chars.Count - 1);
-            chars.RemoveAt(rndIndex);
-            NetworkManager.networkView.RPC("AssignCharId", player, rndIndex);
-            NetworkManager.networkView.RPC("ShowCharacterView", player);
+            if(i > availableChars.Count) {
+                Debug.LogWarning("more players than characters. These players will all be the final charachter.");
+                player.CharID = availableChars.Count - 1;
+            } else {
+                player.CharID = availableChars[i];
+            }
+
+            distributedChars.Add(player.CharID);
         }
+
+        // distribute characters
+        for (int i = 0; i < server.players.Count; i++) {
+            PlayerData player = server.players[i];
+            if (player.ConnectionStatus == (int)ConnectionStatus.Offline)
+                continue;
+
+            foreach (NetworkPlayer networkPlayer in Network.connections) {
+                if (networkPlayer.ipAddress == player.IpAddress) {
+                    NetworkManager.networkView.RPC("AssignCharId", networkPlayer, player.CharID);
+                    string convertedList = Common.ConvertToString(distributedChars);
+                    NetworkManager.networkView.RPC("SetVillageHouses", networkPlayer, convertedList);
+                } else {
+                    Debug.LogWarning("No corresponding ip adress found");
+                }
+            }
+        }
+    }
+
+    [RPC]
+    private void AssignCharId(int charId) {
+        player.CharacterID = charId;
+        player.SaveData();
+        ScreenManagement.Instance.ShowCharacterView();
+        LoadingViewManager.Instance.Hide();
+    }
+
+    [RPC]
+    private void SetVillageHouses(string chars) {
+        List<int> list = Common.ConvertToIntList(chars);
+        player.allPlayerChars = list;
+        player.SaveData();
+        VillageManager.Instance.AssignHouses(list);
     }
 
     // voor individuele studenten die geen karakter hebben gekregen op dag 0
@@ -220,17 +266,5 @@ public class GameManager : MonoBehaviour {
     [RPC]
     private void NextDayRPC(int newDayIndex) {
         //trigger new day on clients
-    }
-
-    [RPC]
-    private void AssignCharId(int charId) {
-        player.CharacterID = charId;
-        player.SaveData();
-        // show character information screen
-    }
-    
-    [RPC]
-    private void ShowCharacterView() {
-        ScreenManagement.Instance.ShowCharacterView();
     }
 }

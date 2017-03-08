@@ -1,8 +1,21 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using System;
 using System.Net;
+using System.Linq;
 
 public static class Common {
+
+    public static string ConvertToString(List<int> list) {
+        List<string> stringList = list.ConvertAll<string>(x => x.ToString());
+        string str = string.Join(",", stringList.ToArray());
+        return str;
+    }
+
+    public static List<int> ConvertToIntList(string str) {
+        List<int> list = str.Split(',').Select(Int32.Parse).ToList();
+        return list;
+    }
 
     public static bool IsValidIpAddress(string ipAddress) {
         if (ipAddress.Length < 4)

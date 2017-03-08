@@ -8,6 +8,8 @@ public class CharacterView : MonoBehaviour {
 
     private CharactersData character;
 
+    public GameObject viewObject;
+
     [SerializeField]
     private Text characterName;
     [SerializeField]
@@ -30,6 +32,6 @@ public class CharacterView : MonoBehaviour {
     }
 
     public void UpdateInfo() {
-        money.text = character.Money.ToString();
+        //money.text = character.Money.ToString();
     }
 }

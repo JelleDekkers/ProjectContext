@@ -21,6 +21,8 @@ public class PlayerData {
     /// </summary>
     public string Name;
 
+    public int Gender;
+
     /// <summary>
     /// The ID of the assigned character in the characters sheet.
     /// </summary>
@@ -28,10 +30,11 @@ public class PlayerData {
 
     public int ConnectionStatus;
 
-    public PlayerData(string ipAddress, int id, string name, int charId) {
+    public PlayerData(int id, string ipAddress, string name, int gender, int charId) {
         ID = id;
         IpAddress = ipAddress;
         Name = name;
+        Gender = gender;
         CharID = charId;
     }
 }

@@ -1,15 +1,5 @@
 DOING:
 
-
-als playerID -1 is dan krijgt deze de allPlayerList Length als id terug die de speler opslaat in het geval van op joinen na de rest van de klas
-
-distribueren van character kijken naar geslacht 
-eerst alle karakters assignen, dan pas distribueren
-lijst rpc uitzoeken, naar string?
-bij het distribueren de speler lijst mee sturen, alleen karakter ids zodat de huizen weten welk karacter er woont
-
-assignen van huis gaat per ID en index in huizenParent transform.	
-dorp maken, switchen van views
 klikken op huis met informatie: Straat + huis nr en bewoner naam
 
 text panels scrollbaar maken 
@@ -24,6 +14,11 @@ menu maken voor client en host met zuierhuizen titel
 
 
 TODO:
+
 code opschonen, onderscheid maken tussen game menu en game manager code
 
 per server alles opslaan zodat de player meerdere servers kan joinen en docenten kunnen meerdere servers hebben
+
+distribueren van character kijken naar geslacht 
+
+iets maken zodat spelers die later joinen ook mee kunnen doen

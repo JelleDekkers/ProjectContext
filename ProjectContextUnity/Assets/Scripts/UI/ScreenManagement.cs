@@ -9,10 +9,6 @@ public class ScreenManagement : MonoBehaviour {
 
     [SerializeField]
     private GameObject loadingView;
-    [SerializeField]
-    private GameObject characterView;
-    [SerializeField]
-    private GameObject villageView;
 
     private void Start() {
         instance = this;
@@ -20,12 +16,12 @@ public class ScreenManagement : MonoBehaviour {
 
 	public void ShowCharacterView() {
         CharacterView.Instance.UpdateInfo();
-        characterView.SetActive(true);
-        villageView.SetActive(false);
+        CharacterView.Instance.viewObject.SetActive(true);
+        VillageManager.Instance.viewObject.SetActive(false);
     }
 
     public void CloseCharacaterView() {
-        villageView.SetActive(true);
-        characterView.SetActive(false);
+        CharacterView.Instance.viewObject.SetActive(false);
+        VillageManager.Instance.viewObject.SetActive(true);
     }
 }

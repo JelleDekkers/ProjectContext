@@ -15,6 +15,8 @@ public class Player {
     public int CharacterID = -1;
     public string Name;
     public int Gender;
+    public List<int> allPlayerChars;
+    public int GameState = -1;
 
     private static string fileName = "gameData";
     private static string filePath = "/" + fileName + ".gd";

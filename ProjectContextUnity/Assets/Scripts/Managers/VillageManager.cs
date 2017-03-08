@@ -7,6 +7,8 @@ public class VillageManager : MonoBehaviour {
     private static VillageManager instance;
     public static VillageManager Instance { get { return instance; } }
 
+    public GameObject viewObject;
+
     [SerializeField]
     private Transform housesParent;
     [SerializeField]
@@ -16,11 +18,12 @@ public class VillageManager : MonoBehaviour {
         instance = this;
 	}
 
-    public void SetHouses() {
+    public void AssignHouses(List<int> characters) {
         House[] houses = housesParent.GetComponentsInChildren<House>();
-        //foreach player
-        //foreach (House h in houses)
-        //    h.SetOccupant();
+        for(int i = 0; i < characters.Count; i++) {
+            houses[i].CharacterIndex = characters[i];
+            print("house nr: " + i + " gets: " + characters[i]);
+        }
     }
 
     public void SelectHouse(GameObject house) {
