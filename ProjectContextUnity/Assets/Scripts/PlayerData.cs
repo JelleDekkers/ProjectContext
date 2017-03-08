@@ -1,4 +1,9 @@
-﻿/// <summary>
+﻿public enum ConnectionStatus {
+    Online,
+    Offline
+}
+
+/// <summary>
 /// Player Data class that holds client information for the host
 /// </summary>
 [System.Serializable]
@@ -20,6 +25,8 @@ public class PlayerData {
     /// The ID of the assigned character in the characters sheet.
     /// </summary>
     public int CharID;
+
+    public int ConnectionStatus;
 
     public PlayerData(string ipAddress, int id, string name, int charId) {
         ID = id;

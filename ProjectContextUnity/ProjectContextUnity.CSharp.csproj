@@ -75,24 +75,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Demos\Assets\Scripts\BluetoothDemoGuiBase.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Demos\Assets\Scripts\BluetoothDemoMenu.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Demos\Assets\Scripts\BluetoothDiscoveryDemoGui.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Demos\Assets\Scripts\BluetoothExamplesTools.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Demos\Assets\Scripts\BluetoothFileTransferDemoGui.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Demos\Assets\Scripts\BluetoothMultiplayerDemoGui.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Demos\Assets\Scripts\CameraFade.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Demos\Assets\Scripts\FileTransfer.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Demos\Assets\Scripts\NetworkTransformInterpolation.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Demos\Assets\Scripts\TestActor.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Source\AndroidBluetoothMultiplayer.JavaEvents.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Source\AndroidBluetoothMultiplayer.JavaMethods.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Source\AndroidBluetoothMultiplayer.Unity.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Source\AndroidJavaUtilities.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Source\BluetoothDevice.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Source\BluetoothDeviceClass.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Source\BluetoothMultiplayerMode.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Source\BluetoothNotEnabledException.cs" />
     <Compile Include="Assets\Data\Runtime\Characters.cs" />
     <Compile Include="Assets\Data\Runtime\CharactersData.cs" />
     <Compile Include="Assets\QuickSheet\Runtime\ExposePropertyAttribute.cs" />
@@ -109,7 +91,6 @@
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\LoadingViewManager.cs" />
     <Compile Include="Assets\Scripts\Managers\VillageManager.cs" />
-    <Compile Include="Assets\Scripts\Network\BluetoothManager.cs" />
     <Compile Include="Assets\Scripts\Network\INetwork.cs" />
     <Compile Include="Assets\Scripts\Network\LocalNetworkManager.cs" />
     <Compile Include="Assets\Scripts\Network\NetworkManager.cs" />
@@ -126,8 +107,6 @@
     <Compile Include="Assets\Scripts\spreadsheetTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\AndroidBluetoothMultiplayer\Android Bluetooth Multiplayer - ReadMe.txt" />
-    <None Include="Assets\AndroidBluetoothMultiplayer\Demos\Assets\Graphics\Particle Alpha Blend.shader" />
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\QuickSheet\ExcelPlugin\Editor\Library\NPOI.2.1.1.txt" />
     <None Include="Assets\QuickSheet\ExcelPlugin\Editor\Library\NPOI.XML" />

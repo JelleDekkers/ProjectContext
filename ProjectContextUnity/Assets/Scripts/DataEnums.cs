@@ -13,8 +13,3 @@ public enum Sexuality {
     Homosexual = 1,
     Bisexual = 2
 }
-
-public enum Status {
-    Neutral,
-    Nazi
-}

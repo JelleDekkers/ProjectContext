@@ -50,7 +50,7 @@ public class MainMenu : MonoBehaviour {
         if (GUI.Button(new Rect(10, 400, 200, 40), "Delete Player Data"))
             Player.DeleteData();
         if (GUI.Button(new Rect(10, 450, 200, 40), "Delete Server Data"))
-            Player.DeleteData();
+            ServerData.DeleteData();
     }
 
     public void HostGame(string code) {

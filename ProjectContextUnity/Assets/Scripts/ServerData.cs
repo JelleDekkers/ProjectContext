@@ -10,8 +10,8 @@ using UnityEngine;
 public class ServerData {
 
     public string Code;
-    public int GameState;// = -1;
-    public List<PlayerData> players; // = new List<PlayerData>();
+    public int GameState;
+    public List<PlayerData> players; 
 
     private static string fileName = "serverData";
     private static string filePath = "/" + fileName + ".gd";

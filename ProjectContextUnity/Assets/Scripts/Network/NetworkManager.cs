@@ -10,6 +10,8 @@ public enum ConnectionState {
 
 public class NetworkManager : MonoBehaviour {
 
+    private static bool showDebugLogs = false;
+
     public static string ConnectionIp = "127.0.0.1";
     public static ushort ConnectionPort = 25000;
     public static NetworkView networkView;
@@ -75,14 +77,16 @@ public class NetworkManager : MonoBehaviour {
     #region Connection Events
     //Networking events do not get called with non-monobehaviour scripts
     private void OnConnectedToServer() {
-        print("connected to server");
+        if(showDebugLogs)
+            print("connected to server");
         network.OnConnectedToServer();
         if (OnConnectedToServerEvent != null)
             OnConnectedToServerEvent();
     }
 
     private void OnPlayerConnected(NetworkPlayer player) {
-        print("Player connected");
+        if (showDebugLogs)
+            print("Player connected");
     }
 
     private void OnFailedToConnect(NetworkConnectionError error) {
@@ -93,7 +97,8 @@ public class NetworkManager : MonoBehaviour {
     }
 
     private void OnDisconnectedFromServer(NetworkDisconnection info) {
-        Debug.Log("OnDisconnectedFromServer()");
+        if (showDebugLogs)
+            Debug.Log("OnDisconnectedFromServer()");
         network.OnDisconnectedFromServer(info);
         SceneManager.LoadScene("menu");
         if(!Network.isServer && info == NetworkDisconnection.LostConnection)
@@ -105,7 +110,8 @@ public class NetworkManager : MonoBehaviour {
         if (Network.isServer)
             OnPlayerDisconnectedFromServer();
 
-        print("Player disconnected: " + player);
+        if (showDebugLogs)
+            print("Player disconnected: " + player);
     } 
 
     private void OnServerInitialized() {
@@ -114,7 +120,8 @@ public class NetworkManager : MonoBehaviour {
     #endregion Connection Events
 
     public static void CreateServer() {
-        print("Creating server");
+        if (showDebugLogs)
+            print("Creating server");
         IsHost = true;
     }
 

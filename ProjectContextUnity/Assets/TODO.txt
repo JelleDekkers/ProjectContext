@@ -1,19 +1,16 @@
 DOING:
 
-testen met meerdere spelers: player list en player save/load
 
-Host moet de player lijst opslaan zodat de host altijd een lijst van alle spelers heeft en kan zien wie online/offline is
 als playerID -1 is dan krijgt deze de allPlayerList Length als id terug die de speler opslaat in het geval van op joinen na de rest van de klas
-
-lijst rpc uitzoeken
 
 distribueren van character kijken naar geslacht 
 eerst alle karakters assignen, dan pas distribueren
-bij het distribueren de speler lijst mee sturen, alleen karakter ids zodat de huizen weten wie er woont
+lijst rpc uitzoeken, naar string?
+bij het distribueren de speler lijst mee sturen, alleen karakter ids zodat de huizen weten welk karacter er woont
 
 assignen van huis gaat per ID en index in huizenParent transform.	
 dorp maken, switchen van views
-klikken op huis met informatie: Straat + huis nr en bewoner
+klikken op huis met informatie: Straat + huis nr en bewoner naam
 
 text panels scrollbaar maken 
 

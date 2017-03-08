@@ -44,12 +44,6 @@ public class GameManager : MonoBehaviour {
             server.SaveData();
         }
 
-        print("serverData:");
-        print("code: " + server.Code);
-        print("gameState: "+ server.GameState);
-        print("players: " + server.players);
-        print("players count: " + server.players.Count);
-
         if (Network.isServer) 
             NetworkManager.OnPlayerDisconnectedFromServer += RefreshPlayerList;
         else 
@@ -87,9 +81,10 @@ public class GameManager : MonoBehaviour {
         // player list:
         for (int i = 0; i < server.players.Count; i++) {
             GUI.Label(new Rect(10, 180 + (i * 10), 20, 20), i + ": ");
-            GUI.Label(new Rect(40, 180 + (i * 10), 300, 20), " name: "+ server.players[i].Name);
-            GUI.Label(new Rect(120, 180 + (i * 10), 300, 20), " char id: " + server.players[i].CharID.ToString());
-            GUI.Label(new Rect(200, 180 + (i * 10), 300, 20), " ip: " + server.players[i].IpAddress);
+            GUI.Label(new Rect(40, 180 + (i * 10), 100, 20), ((ConnectionStatus)server.players[i].ConnectionStatus).ToString());
+            GUI.Label(new Rect(100, 180 + (i * 10), 300, 20), " name: "+ server.players[i].Name);
+            GUI.Label(new Rect(200, 180 + (i * 10), 300, 20), " char id: " + server.players[i].CharID.ToString());
+            GUI.Label(new Rect(300, 180 + (i * 10), 300, 20), " ip: " + server.players[i].IpAddress);
 
             //if(GUI.Button(new Rect(250, 180 + (i * 10), 300, 20), "Randomize Character")) 
             //    NetworkManager.networkView.RPC("AssignCharId", Network.connections[i], GetRandomCharId());
@@ -101,10 +96,11 @@ public class GameManager : MonoBehaviour {
         GUI.Label(new Rect(10, 60, 1000, 20), "Name: " + player.Name);
         GUI.Label(new Rect(10, 70, 1000, 20), "Gender: " + (Gender)player.Gender);
         GUI.Label(new Rect(10, 80, 1000, 20), "Character ID: " + player.CharacterID);
-        if(player.CharacterID == -1)
-            GUI.Label(new Rect(10, 90, 1000, 20), "Character Name: " + player.CharacterID);
+        GUI.Label(new Rect(10, 90, 1000, 20), "Game ID: " + player.ID);
+        if (player.CharacterID == -1)
+            GUI.Label(new Rect(10, 100, 1000, 20), "Character Name: " + player.CharacterID);
         else
-            GUI.Label(new Rect(10, 90, 1000, 20), "Character Name: " + CharactersSheet.dataArray[player.CharacterID].Name);
+            GUI.Label(new Rect(10, 100, 1000, 20), "Character Name: " + CharactersSheet.dataArray[player.CharacterID].Name);
 
 
         if (GUI.Button(new Rect(10, 120, 300, 40), "Disconnect from server"))
@@ -113,7 +109,7 @@ public class GameManager : MonoBehaviour {
 
     private void OnConnectedToServer() {
         if (!Network.isServer) 
-            NetworkManager.networkView.RPC("AddNewPlayer", RPCMode.Server, player.ID, player.Name, player.CharacterID);
+            NetworkManager.networkView.RPC("PlayerConnected", RPCMode.Server, player.ID, player.Name, player.CharacterID);
         
         NetworkManager.OnConnectedToServerEvent -= OnConnectedToServer;
     }
@@ -130,31 +126,56 @@ public class GameManager : MonoBehaviour {
     private IEnumerator RefreshPlayerListCoroutine() {
         float waitTime = 2;
         yield return new WaitForSeconds(waitTime);
-        if (Network.connections.Length == 0)
-            server.players.Clear();
+        if (Network.connections.Length == 0) {
+            foreach (PlayerData player in server.players) {
+                if (player.ConnectionStatus == (int)ConnectionStatus.Online) {
+                    player.ConnectionStatus = (int)ConnectionStatus.Offline;
+                    server.SaveData();
+                    yield return null;
+                }
+            }
+        }
 
-        // all clients need to resend their information again
+        // cycle through player data list
         for (int i = 0; i < server.players.Count; i++) {
             PlayerData player = server.players[i];
+            //cycle through network players list
             foreach (NetworkPlayer net in Network.connections) {
-                if (player.IpAddress == net.ipAddress)
+                if (player.IpAddress == net.ipAddress) {
                     continue;
-                else
-                    server.players.RemoveAt(i);
+                } else {
+                    server.players[i].ConnectionStatus = (int)ConnectionStatus.Offline;
+                }
             }
         }
     }
 
-    private void OnDestroy() {
-        print("object destroyed");
+    [RPC]
+    private void PlayerConnected(int id, string name, int charID) {
+        NetworkPlayer networkPlayer = Network.connections[Network.connections.Length - 1];
+        string ipAdress = networkPlayer.ipAddress;
+        if (id == -1) {
+            PlayerData player = new PlayerData(ipAdress, id, name, charID);
+            player.ConnectionStatus = (int)ConnectionStatus.Online;
+            int newId = server.players.Count;
+            player.ID = newId;
+            server.players.Add(player);
+            NetworkManager.networkView.RPC("SetPlayerId", networkPlayer, newId);
+        } else {
+            PlayerData player = server.players[id];
+            player.ConnectionStatus = (int)ConnectionStatus.Online;
+            player.Name = name;
+        }
+
+        server.SaveData();
     }
 
     [RPC]
-    private void AddNewPlayer(int id, string name, int charID) {
-        string ipAdress = Network.connections[Network.connections.Length - 1].ipAddress;
-        PlayerData player = new PlayerData(ipAdress, id, name, charID);
-        server.players.Add(player);
+    private void SetPlayerId(int id) {
+        player.ID = id;
+        player.SaveData();
     }
+
 
     private void TriggerNextDay() {
         if(server.GameState == (int)GameState.Day5) {
@@ -164,12 +185,14 @@ public class GameManager : MonoBehaviour {
 
         if (server.GameState == (int)GameState.ServerStart) {
             DistributeCharsAmongstPlayers();
-            NetworkManager.networkView.RPC("NextDayRPC", RPCMode.Others, server.GameState++);
+            NetworkManager.networkView.RPC("NextDayRPC", RPCMode.Others, server.GameState + 1);
         } else {
-            NetworkManager.networkView.RPC("NextDayRPC", RPCMode.All, server.GameState++);
+            NetworkManager.networkView.RPC("NextDayRPC", RPCMode.Others, server.GameState + 1);
         }
 
         server.GameState++;
+        server.SaveData();
+        RefreshPlayerList();
     }
 
     private void DistributeCharsAmongstPlayers() {
@@ -192,11 +215,6 @@ public class GameManager : MonoBehaviour {
     private int GetRandomCharId() {
         int rndId = Random.Range(0, CharactersSheet.dataArray.Length);
         return rndId;
-    }
-
-    [RPC]
-    private void SetPlayerId(int id) {
-        player.ID = id;
     }
 
     [RPC]

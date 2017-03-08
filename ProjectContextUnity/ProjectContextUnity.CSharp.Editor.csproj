@@ -156,9 +156,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Source\Editor\ManifestChecker.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Source\Editor\ManifestGenerator.cs" />
-    <Compile Include="Assets\AndroidBluetoothMultiplayer\Source\Editor\UuidGenerator.cs" />
     <Compile Include="Assets\Data\Editor\CharactersAssetCreator.cs" />
     <Compile Include="Assets\Data\Editor\CharactersEditor.cs" />
     <Compile Include="Assets\QuickSheet\Editor\BaseEditor.cs" />
@@ -207,8 +204,6 @@
     <Compile Include="Assets\QuickSheet\GDataPlugin\Editor\GoogleMachineEditor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\AndroidBluetoothMultiplayer\Android Bluetooth Multiplayer - ReadMe.txt" />
-    <None Include="Assets\AndroidBluetoothMultiplayer\Demos\Assets\Graphics\Particle Alpha Blend.shader" />
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\QuickSheet\ExcelPlugin\Editor\Library\NPOI.2.1.1.txt" />
     <None Include="Assets\QuickSheet\ExcelPlugin\Editor\Library\NPOI.XML" />

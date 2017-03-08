@@ -25,6 +25,9 @@ public class GameServer {
 /// Class for sending and recieving data through wifi.
 /// </summary>
 public class UDPServerDiscovery{
+
+    private static bool showDebugLogs = false;
+
     public static List<GameServer> foundLocalServers = new List<GameServer>();
     public static Action<string, string> onAddedToList;
     public static Action OnFinishedLookingForServers;
@@ -63,7 +66,8 @@ public class UDPServerDiscovery{
            
             broadcastClient = udpClient;
             broadcastEndPoint = iPEndPoint;
-            Debug.Log("Broadcast listener opened on port " + broadcastEndPoint.Port.ToString());
+            if (showDebugLogs)
+                Debug.Log("Broadcast listener opened on port " + broadcastEndPoint.Port.ToString());
         } catch {
             Debug.LogError("Catch: Something went wrong opening listening port on port nr " + rndPort);
             //PopupManager.ShowErrorPopup("Error", "Something went wrong, please try again");
@@ -86,7 +90,8 @@ public class UDPServerDiscovery{
         IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Broadcast, BROADCAST_PORT);
         updClient.BeginSend(sendBytes, sendBytes.Length, ipEndPoint, new AsyncCallback(FindServerCallback), updClient);
 
-        Debug.Log("Find server message sent on broadcast listener");
+        if (showDebugLogs)
+            Debug.Log("Find server message sent on broadcast listener");
     }
 
     private void FindServerCallback(IAsyncResult ar) {
@@ -94,7 +99,8 @@ public class UDPServerDiscovery{
         UdpClient updClient = (UdpClient)ar.AsyncState;
         int bytesSent = updClient.EndSend(ar);
 
-        Debug.Log("Completed search for servers");
+        if (showDebugLogs)
+            Debug.Log("Completed search for servers");
 
         // close the broadcast client
         updClient.Close();
@@ -104,7 +110,8 @@ public class UDPServerDiscovery{
    public void ListenServerCallbackThreaded(IAsyncResult ar) {
         // server has responded with its game name
         // send this to the stateController
-        Debug.Log("ListenServerCallback, bytes received:" + broadcastClient.Available);
+        if (showDebugLogs)
+            Debug.Log("ListenServerCallback, bytes received:" + broadcastClient.Available);
 
         try {
             IPEndPoint ep1 = ((UdpState)(ar.AsyncState)).iPEndPoint;
@@ -137,7 +144,8 @@ public class UDPServerDiscovery{
         }
 
         CloseListeningPort();
-		Debug.Log("HandleServerCallbackMainThread Stop");
+        if (showDebugLogs)
+            Debug.Log("HandleServerCallbackMainThread Stop");
     }
 
     private static void AddLocalServer(string name, string address) {
@@ -155,7 +163,8 @@ public class UDPServerDiscovery{
         try {
             processMainThread = false;
             broadcastClient.Close();
-            Debug.Log("Broadcast listener closed");
+            if (showDebugLogs)
+                Debug.Log("Broadcast listener closed");
         } catch {
 
         }
@@ -177,8 +186,8 @@ public class UDPServerDiscovery{
                 if (err == NetworkConnectionError.NoError) {
                     serverPort = rndServerPort;
                     serverCode = _serverCode;
-                    Debug.Log("servercode: " + serverCode);
-                    Debug.Log("Server started");
+                    if (showDebugLogs)
+                        Debug.Log("Server started");
                     return;
                 }
             }
@@ -201,8 +210,8 @@ public class UDPServerDiscovery{
             udpState.iPEndPoint = ipEndPoint;
             udpState.updClient = udpClient;
             udpClient.BeginReceive(new AsyncCallback(ListenForClientsCallback), udpState);
-
-            Debug.Log("Server listening port opened");
+            if (showDebugLogs)
+                Debug.Log("Server listening port opened");
         } catch {
             //PopupManager.ShowErrorPopup("Error", "Something went wrong, please try again");
             //SceneManager.LoadLevel(SceneManager.Menu);
@@ -211,14 +220,16 @@ public class UDPServerDiscovery{
 
     private void ListenForClientsCallback(IAsyncResult ar) {
         //Received a broadcast from a client
-        Debug.Log("Client message received on server listening port");
+        if (showDebugLogs)
+            Debug.Log("Client message received on server listening port");
 
         UdpClient udpClient = (UdpClient)((UdpState)(ar.AsyncState)).updClient;
         IPEndPoint ipEndpoint = (IPEndPoint)((UdpState)(ar.AsyncState)).iPEndPoint;
         byte[] receiveBytes = udpClient.EndReceive(ar, ref ipEndpoint);
         int clientPort = BitConverter.ToInt32(receiveBytes, 0);
 
-        Debug.Log("Client is listening for reply on broadcast port " + clientPort.ToString());
+        if (showDebugLogs)
+            Debug.Log("Client is listening for reply on broadcast port " + clientPort.ToString());
 
         //Send a response back to the client on the port they sent us
         string sentData = serverCode;
@@ -231,7 +242,9 @@ public class UDPServerDiscovery{
         // Important!
         // close and re-open the broadcast listening port so that another async operation can start 
         udpClient.Close();
-        Debug.Log("server listening port closed");
+
+        if (showDebugLogs)
+            Debug.Log("server listening port closed");
         ListenForClients();
     }
 
@@ -264,7 +277,8 @@ public class UDPServerDiscovery{
 
     public static void StopListeningForClients() {
         listenClient.Close();
-        Debug.Log("server listening port closed");
+        if (showDebugLogs)
+            Debug.Log("server listening port closed");
     }
 
     public static void StopHostingServer() {
