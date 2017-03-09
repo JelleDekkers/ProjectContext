@@ -15,9 +15,6 @@ public enum GameState {
 
 public class GameManager : MonoBehaviour {
 
-    [SerializeField]
-    private Characters CharactersSheet;
-
     public Player player;
     public ServerData server;
 
@@ -104,7 +101,7 @@ public class GameManager : MonoBehaviour {
         if (player.CharacterID == -1)
             GUI.Label(new Rect(10, 100, 1000, 20), "Character Name: " + player.CharacterID);
         else
-            GUI.Label(new Rect(10, 100, 1000, 20), "Character Name: " + CharactersSheet.dataArray[player.CharacterID].Name);
+            GUI.Label(new Rect(10, 100, 1000, 20), "Character Name: " + CharactersDatabase.Instance.Data.dataArray[player.CharacterID].Name);
 
 
         if (GUI.Button(new Rect(10, 120, 300, 40), "Disconnect from server"))
@@ -204,7 +201,7 @@ public class GameManager : MonoBehaviour {
     private void DistributeCharsAmongstPlayers() {
         List<int> availableChars = new List<int>();
         List<int> distributedChars = new List<int>();
-        foreach (CharactersData c in CharactersSheet.dataArray)
+        foreach (CharactersData c in CharactersDatabase.Instance.Data.dataArray)
             availableChars.Add(c.ID);
        
         // assign character
@@ -246,6 +243,7 @@ public class GameManager : MonoBehaviour {
         player.CharacterID = charId;
         player.SaveData();
         ScreenManagement.Instance.ShowCharacterView();
+        CharacterInfoPanel.Instance.SetInfo(charId);
         LoadingViewManager.Instance.Hide();
     }
 
@@ -259,7 +257,7 @@ public class GameManager : MonoBehaviour {
 
     // voor individuele studenten die geen karakter hebben gekregen op dag 0
     private int GetRandomCharId() {
-        int rndId = Random.Range(0, CharactersSheet.dataArray.Length);
+        int rndId = Random.Range(0, CharactersDatabase.Instance.Data.dataArray.Length);
         return rndId;
     }
 

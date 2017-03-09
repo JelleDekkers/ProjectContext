@@ -27,7 +27,7 @@ public class CharacterView : MonoBehaviour {
     public void SetCharacter(CharactersData character) {
         characterName.text = character.Name;
         characterInfo.text = character.Backstory;
-        characterImage.sprite = CharacterSprites.Instance.sprites[character.ID];
+        characterImage.sprite = CharacterSprites.Instance.Sprites[character.ID];
         UpdateInfo();
     }
 

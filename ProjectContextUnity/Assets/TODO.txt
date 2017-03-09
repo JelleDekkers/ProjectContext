@@ -1,16 +1,22 @@
 DOING:
 
+
 klikken op huis met informatie: Straat + huis nr en bewoner naam
-
-text panels scrollbaar maken 
-
-host game scherm maken
-
-fungus bekijken, placeholder teksten per dag opzetten
 
 village view maken met scrollen, pinchen (inzoomen) en draggen tot aan de grens
 
+huis info panel buttons grid
+
+gebeurtenis scherm maken met keuzes grid
+
+fungus bekijken, placeholder teksten per dag opzetten
+
+
+
+host game scherm maken
 menu maken voor client en host met zuierhuizen titel
+
+eindscore nadenken
 
 
 TODO:

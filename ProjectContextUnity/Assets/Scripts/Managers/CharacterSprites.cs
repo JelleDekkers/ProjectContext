@@ -7,7 +7,8 @@ public class CharacterSprites : MonoBehaviour {
     private static CharacterSprites instance;
     public static CharacterSprites Instance { get { return instance; } }
 
-    public Sprite[] sprites;
+    public Sprite[] Sprites;
+    public Sprite[] Portraits;
 
     private void Start() {
         instance = this;

@@ -88,6 +88,7 @@
     <Compile Include="Assets\Scripts\House.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Managers\CharacterSprites.cs" />
+    <Compile Include="Assets\Scripts\Managers\CharactersDatabase.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\LoadingViewManager.cs" />
     <Compile Include="Assets\Scripts\Managers\VillageManager.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Assets\Scripts\PlayerData.cs" />
     <Compile Include="Assets\Scripts\ServerData.cs" />
     <Compile Include="Assets\Scripts\SpriteOutline.cs" />
+    <Compile Include="Assets\Scripts\UI\CharacterInfoPanel.cs" />
     <Compile Include="Assets\Scripts\UI\CharacterView.cs" />
     <Compile Include="Assets\Scripts\UI\HouseInfoPanel.cs" />
     <Compile Include="Assets\Scripts\UI\Popup.cs" />

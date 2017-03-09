@@ -7,9 +7,6 @@ public class ScreenManagement : MonoBehaviour {
     private static ScreenManagement instance;
     public static ScreenManagement Instance { get { return instance; } }
 
-    [SerializeField]
-    private GameObject loadingView;
-
     private void Start() {
         instance = this;
     }
