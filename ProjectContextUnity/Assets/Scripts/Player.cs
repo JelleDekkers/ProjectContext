@@ -21,12 +21,16 @@ public class Player {
     private static string fileName = "gameData";
     private static string filePath = "/" + fileName + ".gd";
 
+    private static Player instance;
+    public static Player Instance { get { return instance; } }
+
     public void SaveData() {
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + filePath);
         formatter.Serialize(file, this);
         file.Close();
         Debug.Log("Done saving");
+        instance = this;
     }
 
     public Player LoadData() {
@@ -35,6 +39,7 @@ public class Player {
             FileStream file = File.Open(Application.persistentDataPath + filePath, FileMode.Open);
             Player data = (Player)formatter.Deserialize(file);
             file.Close();
+            instance = this;
             return data;
         } else {
             Debug.Log("Trying to load data but no data file found.");

@@ -14,11 +14,12 @@ public class ScreenManagement : MonoBehaviour {
 	public void ShowCharacterView() {
         CharacterView.Instance.UpdateInfo();
         CharacterView.Instance.viewObject.SetActive(true);
-        VillageManager.Instance.viewObject.SetActive(false);
+        VillageView.Instance.viewObject.SetActive(false);
+
     }
 
     public void CloseCharacaterView() {
         CharacterView.Instance.viewObject.SetActive(false);
-        VillageManager.Instance.viewObject.SetActive(true);
+        VillageView.Instance.viewObject.SetActive(true);
     }
 }

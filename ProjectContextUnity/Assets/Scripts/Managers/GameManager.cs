@@ -45,9 +45,13 @@ public class GameManager : MonoBehaviour {
             NetworkManager.OnPlayerDisconnectedFromServer += RefreshPlayerList;
         } else {
             NetworkManager.OnConnectedToServerEvent += OnConnectedToServer;
-            print(player.CharacterID);
             if (player.CharacterID == -1)
                 LoadingViewManager.Instance.Show("Wachten op docent");
+
+            if (player.CharacterID != -1) { 
+                SetVillageHouses(player.allPlayerChars);
+                VillageView.Instance.SetupCharacterButton(player.CharacterID);
+            }
         }
     }
 
@@ -243,6 +247,7 @@ public class GameManager : MonoBehaviour {
         player.CharacterID = charId;
         player.SaveData();
         ScreenManagement.Instance.ShowCharacterView();
+        VillageView.Instance.SetupCharacterButton(player.CharacterID);
         CharacterInfoPanel.Instance.SetInfo(charId);
         LoadingViewManager.Instance.Hide();
     }
@@ -250,9 +255,14 @@ public class GameManager : MonoBehaviour {
     [RPC]
     private void SetVillageHouses(string chars) {
         List<int> list = Common.ConvertToIntList(chars);
+        SetVillageHouses(list);
+    }
+
+    private void SetVillageHouses(List<int> list) {
         player.allPlayerChars = list;
         player.SaveData();
-        VillageManager.Instance.AssignHouses(list);
+        print("players count: " + list.Count);
+        VillageView.Instance.AssignHouses(list);
     }
 
     // voor individuele studenten die geen karakter hebben gekregen op dag 0

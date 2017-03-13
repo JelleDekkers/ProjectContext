@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour {
 
     private void Awake() {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        Screen.orientation = ScreenOrientation.Portrait;
         GamePrefs.LoadData();
     }
 

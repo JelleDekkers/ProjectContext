@@ -17,19 +17,11 @@ public class House : MonoBehaviour {
     public string StreetName;
     public int HouseNumber;
 
-    private void Start() {
+    public void SetPlayerIndex() {
         PlayerIndex = transform.GetSiblingIndex();
     }
-    
-    public void SetOccupant(int playerIndex) {
-        CharacterIndex = playerIndex;
-    }
 
-    public string GetOccupantCharacterName() {
-        return "Lambertus";
-    }
+    private void Update() {
 
-    public string GetOccupantPlayerName() {
-        return "Bob";
     }
 }

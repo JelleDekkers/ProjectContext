@@ -6,9 +6,9 @@ public class CharacterView : MonoBehaviour {
     private static CharacterView instance;
     public static CharacterView Instance { get { return instance; } }
 
-    private CharactersData character;
-
     public GameObject viewObject;
+
+    private CharactersData character;
 
     [SerializeField]
     private Text characterName;
@@ -21,10 +21,10 @@ public class CharacterView : MonoBehaviour {
 
     private void Awake() {
         instance = this;
-        //SetCharacter()
     }
 
     public void SetCharacter(CharactersData character) {
+        this.character = character;
         characterName.text = character.Name;
         characterInfo.text = character.Backstory;
         characterImage.sprite = CharacterSprites.Instance.Sprites[character.ID];
@@ -32,6 +32,9 @@ public class CharacterView : MonoBehaviour {
     }
 
     public void UpdateInfo() {
-        //money.text = character.Money.ToString();
+        if (character == null)
+            SetCharacter(CharactersDatabase.Instance.Data.dataArray[Player.Instance.CharacterID]);
+
+        //money.text = Player.Instance.Money.ToString();
     }
 }

@@ -91,13 +91,13 @@
     <Compile Include="Assets\Scripts\Managers\CharactersDatabase.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\LoadingViewManager.cs" />
-    <Compile Include="Assets\Scripts\Managers\VillageManager.cs" />
     <Compile Include="Assets\Scripts\Network\INetwork.cs" />
     <Compile Include="Assets\Scripts\Network\LocalNetworkManager.cs" />
     <Compile Include="Assets\Scripts\Network\NetworkManager.cs" />
     <Compile Include="Assets\Scripts\Network\UDPServerDiscovery.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerData.cs" />
+    <Compile Include="Assets\Scripts\SelectHouse.cs" />
     <Compile Include="Assets\Scripts\ServerData.cs" />
     <Compile Include="Assets\Scripts\SpriteOutline.cs" />
     <Compile Include="Assets\Scripts\UI\CharacterInfoPanel.cs" />
@@ -106,6 +106,7 @@
     <Compile Include="Assets\Scripts\UI\Popup.cs" />
     <Compile Include="Assets\Scripts\UI\PopupManager.cs" />
     <Compile Include="Assets\Scripts\UI\ScreenManagement.cs" />
+    <Compile Include="Assets\Scripts\UI\VillageView.cs" />
     <Compile Include="Assets\Scripts\spreadsheetTest.cs" />
   </ItemGroup>
   <ItemGroup>
