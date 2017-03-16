@@ -10,7 +10,8 @@ public enum GameState {
     Day2 = 2,
     Day3 = 3,
     Day4 = 4,
-    Day5 = 5
+    Day5 = 5,
+    Day6 = 6 // liberation, character post game
 }
 
 public class GameManager : MonoBehaviour {
@@ -192,7 +193,6 @@ public class GameManager : MonoBehaviour {
 
         if (server.GameState == (int)GameState.ServerStart) {
             DistributeCharsAmongstPlayers();
-            NetworkManager.networkView.RPC("NextDayRPC", RPCMode.Others, server.GameState + 1);
         } else {
             NetworkManager.networkView.RPC("NextDayRPC", RPCMode.Others, server.GameState + 1);
         }
@@ -273,6 +273,6 @@ public class GameManager : MonoBehaviour {
 
     [RPC]
     private void NextDayRPC(int newDayIndex) {
-        //trigger new day on clients
+        DailyEventManager.Instance.StartNextEvent();
     }
 }

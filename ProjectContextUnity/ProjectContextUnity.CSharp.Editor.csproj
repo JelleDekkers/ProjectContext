@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -56,6 +54,9 @@
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
@@ -99,6 +100,9 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Purchasing">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.VR">
       <HintPath>Library\UnityAssemblies\UnityEditor.VR.dll</HintPath>
     </Reference>
@@ -116,6 +120,9 @@
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    </Reference>
+    <Reference Include="Editor.ReorderableList">
+      <HintPath>Assets\Fungus\Thirdparty\Reorderable List Field\Editor\Editor.ReorderableList.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>Assets\QuickSheet\ExcelPlugin\Editor\Library\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -160,6 +167,58 @@
   <ItemGroup>
     <Compile Include="Assets\Data\Editor\CharactersAssetCreator.cs" />
     <Compile Include="Assets\Data\Editor\CharactersEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\AssetModProcessor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\BlockEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\BlockInspector.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\CallEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\CameraMenuItems.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\CharacterEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\CommandEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\CommandListAdaptor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\ControlAudioEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\CustomGUI.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\DialogInputEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\EditorExtensions.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\EditorZoomArea.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\EventHandlerEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\EventWindow.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\FlowchartEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\FlowchartMenuItems.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\FlowchartWindow.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\FungusEditorResources.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\FungusEditorResourcesGenerated.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\IfEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\InvokeEventEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\InvokeMethodEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\LabelEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\LocalizationEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\MenuEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\MenuTimerEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\NarrativeMenuItems.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\PortraitEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\SaveDataEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\SaveMenuEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\SaveMenuItems.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\SavePointLoadedEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\SayEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\SerializedPropertyExtensions.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\SetColliderEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\SetVariableEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\SpriteMenuItems.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\StageEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\VariableEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\VariableListAdaptor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\ViewEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\WriteEditor.cs" />
+    <Compile Include="Assets\Fungus\Scripts\Editor\WriterAudioEditor.cs" />
+    <Compile Include="Assets\Fungus\Thirdparty\FungusLua\Scripts\Editor\DropDownControl.cs" />
+    <Compile Include="Assets\Fungus\Thirdparty\FungusLua\Scripts\Editor\ExecuteHandlerEditor.cs" />
+    <Compile Include="Assets\Fungus\Thirdparty\FungusLua\Scripts\Editor\LuaBindingsEditor.cs" />
+    <Compile Include="Assets\Fungus\Thirdparty\FungusLua\Scripts\Editor\LuaScriptEditor.cs" />
+    <Compile Include="Assets\Fungus\Thirdparty\FungusLua\Scripts\Editor\LuaStoreEditor.cs" />
+    <Compile Include="Assets\Fungus\Thirdparty\FungusLua\Scripts\Editor\LuaUtilsEditor.cs" />
+    <Compile Include="Assets\Fungus\Thirdparty\FungusLua\Scripts\Editor\MenuItems.cs" />
+    <Compile Include="Assets\Fungus\Thirdparty\Usfxr\Editor\SfxrGenerator.cs" />
     <Compile Include="Assets\QuickSheet\Editor\BaseEditor.cs" />
     <Compile Include="Assets\QuickSheet\Editor\BaseMachine.cs" />
     <Compile Include="Assets\QuickSheet\Editor\BaseMachineEditor.cs" />
@@ -206,6 +265,23 @@
     <Compile Include="Assets\QuickSheet\GDataPlugin\Editor\GoogleMachineEditor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Fungus\Docs\CHANGELOG.txt" />
+    <None Include="Assets\Fungus\Docs\LICENSE.txt" />
+    <None Include="Assets\Fungus\Docs\README.txt" />
+    <None Include="Assets\Fungus\Fonts\Amaranth\SIL Open Font License.txt" />
+    <None Include="Assets\Fungus\Fonts\Exo2\OFL.txt" />
+    <None Include="Assets\Fungus\Integrations\Spine\Readme.txt" />
+    <None Include="Assets\Fungus\Scripts\link.xml" />
+    <None Include="Assets\Fungus\Textures\Attribution.txt" />
+    <None Include="Assets\Fungus\Thirdparty\FungusLua\Resources\Lua\fungus.txt" />
+    <None Include="Assets\Fungus\Thirdparty\FungusLua\Resources\Lua\inspect.txt" />
+    <None Include="Assets\Fungus\Thirdparty\FungusLua\Resources\Types\FungusTypes.txt" />
+    <None Include="Assets\Fungus\Thirdparty\FungusLua\Resources\Types\UnityTypes.txt" />
+    <None Include="Assets\Fungus\Thirdparty\FungusLua\Thirdparty\JSON\readme.txt" />
+    <None Include="Assets\Fungus\Thirdparty\LeanTween\ReadMe.txt" />
+    <None Include="Assets\Fungus\Thirdparty\Reorderable List Field\Editor\Editor.ReorderableList.xml" />
+    <None Include="Assets\Fungus\Thirdparty\Reorderable List Field\LICENSE.txt" />
+    <None Include="Assets\Fungus\Thirdparty\Reorderable List Field\README.txt" />
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\QuickSheet\ExcelPlugin\Editor\Library\NPOI.2.1.1.txt" />
     <None Include="Assets\QuickSheet\ExcelPlugin\Editor\Library\NPOI.XML" />

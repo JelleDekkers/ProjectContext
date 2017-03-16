@@ -1,9 +1,9 @@
 DOING:
 
-fungus bekijken, placeholder teksten per dag opzetten
+opslaan van laatste event block name en loaden
+onderscheiden van flowcharts voor verschillende karakters
 
-gebeurtenis scherm maken met keuzes 
-
+outline voor klikbare huizen nog doen
 
 host/client game scherm maken
 client zoals het nu is
@@ -12,6 +12,7 @@ client zoals het nu is
 loading view doesnt work in builds?
 
 village view maken met scrollen, pinchen (inzoomen) en draggen tot aan de grens
+
 
 
 host:
