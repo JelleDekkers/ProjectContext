@@ -44,3 +44,5 @@ Zuiderhuizen -> UpdateVariables:
 Vergeet niet een prefab te maken van je flowchart en deze in de Prefab -> Flowcharts folder te zetten en deze via SVN te comitten
 Noem de blocks iets handigs, zoals Dag 1 Optie 1 zodat het leesbaar blijft. 
 BLock description geven een handige en korte descrption aan de blocks. Dit helpt ook om overzicht te houden.
+
+Om je flowchart te testen, start de scene en druk op spatiebalk, wanneer de interface weer verdwijnt (als het goed is, nadat een keuze is gemaakt) druk weer op start om dus een nieuwe dag na te bootsen.
