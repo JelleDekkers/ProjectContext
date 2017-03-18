@@ -1,7 +1,7 @@
 DOING:
 
-onderscheid tussen student en docent versie
-host/client game scherm maken
+
+host game scherm maken
 
 
 
@@ -24,7 +24,6 @@ knop volgende dag + info wat de volgende gebeurtenis is
 
 server code tekst
 dag nummer tekst
-menu knop
 
 
 

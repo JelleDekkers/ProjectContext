@@ -8,6 +8,10 @@ public class MainMenu : MonoBehaviour {
     private InputField nameInputField;
     [SerializeField]
     private InputField serverCodeInputField;
+    [SerializeField]
+    private Canvas clientMenu;
+    [SerializeField]
+    private Canvas hostMenu;
 
     private string clientCode = "";
     private string serverCode = "";
@@ -16,6 +20,7 @@ public class MainMenu : MonoBehaviour {
     private int serversFoundCount { get { return UDPServerDiscovery.foundLocalServers.Count; } }
     private string[] genders = new string[] { "Man", "Vrouw" };
     private int playerGender = 0;
+    private bool isStudentVersion = true;
 
     public bool ShowDebugOptions = false;
 
@@ -23,6 +28,9 @@ public class MainMenu : MonoBehaviour {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Screen.orientation = ScreenOrientation.Portrait;
         GamePrefs.LoadData();
+
+        if (GameVersion.Instance.Version == Version.Student)
+            hostMenu.gameObject.SetActive(false);
     }
 
     private void Start() {
@@ -41,21 +49,30 @@ public class MainMenu : MonoBehaviour {
     }
 
     private void OnGUI() {
-        ShowDebugOptions = GUI.Toggle(new Rect(10, Screen.height - 50, 100, 100), ShowDebugOptions, " Debug Options");
+        ShowDebugOptions = GUI.Toggle(new Rect(10, Screen.height - 30, 100, 100), ShowDebugOptions, " Debug Options");
         if (!ShowDebugOptions)
             return;
 
-        GUI.Label(new Rect(10, 10, 1000, 20), "Network reachability: " + Application.internetReachability);
+        isStudentVersion = GUI.Toggle(new Rect(10, 10, 1000, 100), isStudentVersion, " Student Game Version");
+        if (isStudentVersion) {
+            GameVersion.Instance.Version = Version.Student;
+            hostMenu.gameObject.SetActive(false);
+        } else {
+            GameVersion.Instance.Version = Version.Teacher;
+            hostMenu.gameObject.SetActive(true);
+        }
 
-        serverCode = GUI.TextField(new Rect(220, 30, 100, 40), serverCode);
-        if (GUI.Button(new Rect(10, 30, 200, 40), "Host Server")) 
+        GUI.Label(new Rect(10, 40, 1000, 20), "Network reachability: " + Application.internetReachability);
+
+        serverCode = GUI.TextField(new Rect(220, 60, 100, 40), serverCode);
+        if (GUI.Button(new Rect(10, 60, 200, 40), "Host Server")) 
             HostGame(serverCode);
 
-        clientCode = GUI.TextField(new Rect(220, 80, 100, 40), clientCode);
-        if (GUI.Button(new Rect(10, 80, 200, 40), "Connect to server"))
+        clientCode = GUI.TextField(new Rect(220, 110, 100, 40), clientCode);
+        if (GUI.Button(new Rect(10, 110, 200, 40), "Connect to server"))
             GetServersAndConnect();
 
-        GUI.Label(new Rect(220, 130, 100, 40), "Servers found: " + serversFoundCount);
+        GUI.Label(new Rect(220, 160, 100, 40), "Servers found: " + serversFoundCount);
 
         // player info:
         GUI.Label(new Rect(10, 180, 300, 20), "Enter your name: ");

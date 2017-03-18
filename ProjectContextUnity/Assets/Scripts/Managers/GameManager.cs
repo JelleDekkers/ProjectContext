@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour {
 
     public void Quit() {
         NetworkManager.Quit();
-        SceneManager.LoadScene("ClientMenu");
+        SceneManager.LoadScene("menu");
     }
 
     private void RefreshPlayerList() {
