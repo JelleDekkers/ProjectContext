@@ -4,6 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
+    [SerializeField]
+    private InputField nameInputField;
+    [SerializeField]
+    private InputField serverCodeInputField;
+
     private string clientCode = "";
     private string serverCode = "";
     private string playerName;
@@ -11,6 +16,8 @@ public class MainMenu : MonoBehaviour {
     private int serversFoundCount { get { return UDPServerDiscovery.foundLocalServers.Count; } }
     private string[] genders = new string[] { "Man", "Vrouw" };
     private int playerGender = 0;
+
+    public bool ShowDebugOptions = false;
 
     private void Awake() {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -23,10 +30,21 @@ public class MainMenu : MonoBehaviour {
         clientCode = GamePrefs.ServerCode;
         playerName = GamePrefs.Name;
         playerGender = GamePrefs.Gender;
+
+        nameInputField.text = playerName;
+        serverCodeInputField.text = serverCode;
+    }
+
+    private void Update() {
+        playerName = nameInputField.text;
+        serverCode = serverCodeInputField.text;
     }
 
     private void OnGUI() {
-        //network info:
+        ShowDebugOptions = GUI.Toggle(new Rect(10, Screen.height - 50, 100, 100), ShowDebugOptions, " Debug Options");
+        if (!ShowDebugOptions)
+            return;
+
         GUI.Label(new Rect(10, 10, 1000, 20), "Network reachability: " + Application.internetReachability);
 
         serverCode = GUI.TextField(new Rect(220, 30, 100, 40), serverCode);
@@ -72,7 +90,8 @@ public class MainMenu : MonoBehaviour {
         }
     }
 
-    private void GetServersAndConnect() {
+    public void GetServersAndConnect() {
+        SavePlayerInfo();
         LoadingViewManager.Instance.Show("Joining Server");
         UDPServerDiscovery.SearchForServers();
         UDPServerDiscovery.OnFinishedLookingForServers += LoadingViewManager.Instance.Hide;
@@ -100,10 +119,10 @@ public class MainMenu : MonoBehaviour {
     }
 
     private void SavePlayerInfo() {
-        if(!Common.IsValidName(playerName)) {
-            PopupManager.Instance.ShowPopup("Error", "Please enter a valid name");
-            return;
-        }
+        //if(!Common.IsValidName(playerName)) {
+        //    PopupManager.Instance.ShowPopup("Error", "Please enter a valid name");
+        //    return;
+        //}
 
         GamePrefs.SaveName(playerName);
         GamePrefs.SaveGender((Gender)playerGender);

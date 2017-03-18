@@ -1,8 +1,8 @@
 DOING:
 
-
+onderscheid tussen student en docent versie
 host/client game scherm maken
-client zoals het nu is
+
 
 
 outline voor klikbare huizen nog doen
@@ -27,17 +27,6 @@ dag nummer tekst
 menu knop
 
 
-menu:
-Host:
-title
-server code
-server start button
-
-client:
-title
-naam en gender
-server code
-join button
 
 eindscore scherm top 10?
 

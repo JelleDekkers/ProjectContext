@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 
     public Player player;
     public ServerData server;
+    public bool ShowDebugOptions = false;
 
     private void Start() {
         if (!Network.isServer) {
@@ -66,6 +67,11 @@ public class GameManager : MonoBehaviour {
     }
 
     private void OnGUI() {
+        ShowDebugOptions = GUI.Toggle(new Rect(10, Screen.height - 50, 100, 100), ShowDebugOptions, " Debug Options");
+
+        if (!ShowDebugOptions)
+            return;
+
         GUI.Label(new Rect(10, 10, 1000, 20), "Is host: " + NetworkManager.IsHost);
         GUI.Label(new Rect(10, 20, 1000, 20), "Server Code: " + NetworkManager.serverCode);
         GUI.Label(new Rect(10, 30, 1000, 20), "connections: " + Network.connections.Length);
@@ -123,7 +129,7 @@ public class GameManager : MonoBehaviour {
 
     public void Quit() {
         NetworkManager.Quit();
-        SceneManager.LoadScene("menu");
+        SceneManager.LoadScene("ClientMenu");
     }
 
     private void RefreshPlayerList() {
