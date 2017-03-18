@@ -12,6 +12,14 @@ public class DailyEventManager : MonoBehaviour {
     [SerializeField]
     private Text newsPaperDate;
 
+    public DailyEvent[] Events = new DailyEvent[] {
+        new DailyEvent("Duitsland valt aan!",       "14 mei 1940"),
+        new DailyEvent("Razzia's naar Joden",       "20 september 1941"),
+        new DailyEvent("Avondklok gaat in",         "1 novemeber 1942"),
+        new DailyEvent("Hongerwinter slaat toe!",   "2 januari 1943"),
+        new DailyEvent("Nederland bevrijdt!",       "14 mei 1945")
+    };
+
     private static DailyEventManager instance;
     public static DailyEventManager Instance { get { return instance; } }
     	
@@ -19,10 +27,10 @@ public class DailyEventManager : MonoBehaviour {
         instance = this;
     }
 
-    public void StartNextEvent() {
+    public void StartDailyEvent(int index) {
         newsPaperCanvas.gameObject.SetActive(true);
-        //newsText
-        //date
+        newsText.text = Events[index].Event;
+        newsPaperDate.text = Events[index].Date;
     }
 
     public void CloseNewsPaper() {
@@ -34,3 +42,4 @@ public class DailyEventManager : MonoBehaviour {
         FlowchartHandler.Instance.StartNewEvent();
     }
 }
+

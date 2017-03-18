@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour {
             if (player.CharacterID != -1) { 
                 SetVillageHouses(player.allPlayerChars);
                 VillageView.Instance.SetupCharacterButton(player.CharacterID);
+                FlowchartHandler.Instance.SetFlowChart(player.CharacterID);
             }
         }
     }
@@ -249,6 +250,7 @@ public class GameManager : MonoBehaviour {
         ScreenManagement.Instance.ShowCharacterView();
         VillageView.Instance.SetupCharacterButton(player.CharacterID);
         CharacterInfoPanel.Instance.SetInfo(charId);
+        FlowchartHandler.Instance.SetFlowChart(charId);
         LoadingViewManager.Instance.Hide();
     }
 
@@ -273,6 +275,6 @@ public class GameManager : MonoBehaviour {
 
     [RPC]
     private void NextDayRPC(int newDayIndex) {
-        DailyEventManager.Instance.StartNextEvent();
+        DailyEventManager.Instance.StartDailyEvent(newDayIndex - 1); // -1 omdat de index van newsEvents begint op 0 maar gameState bij 1
     }
 }

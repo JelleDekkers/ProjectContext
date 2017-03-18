@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -69,9 +66,6 @@
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
@@ -551,20 +545,22 @@
     <Compile Include="Assets\Fungus\Thirdparty\iTween\iTween.cs" />
     <Compile Include="Assets\QuickSheet\Runtime\ExposePropertyAttribute.cs" />
     <Compile Include="Assets\QuickSheet\Runtime\Util\ConvertExt.cs" />
-    <Compile Include="Assets\Scripts\Common.cs" />
+    <Compile Include="Assets\Scripts\DailyEvent.cs" />
     <Compile Include="Assets\Scripts\DataEnums.cs" />
     <Compile Include="Assets\Scripts\EventSystemInstance.cs" />
-    <Compile Include="Assets\Scripts\FlowchartHandler.cs" />
-    <Compile Include="Assets\Scripts\Formatter.cs" />
     <Compile Include="Assets\Scripts\Fungus Extensions\DetectNewEventCommand.cs" />
     <Compile Include="Assets\Scripts\Fungus Extensions\UpdateVarsCommand.cs" />
     <Compile Include="Assets\Scripts\GamePrefs.cs" />
+    <Compile Include="Assets\Scripts\Helper\Common.cs" />
     <Compile Include="Assets\Scripts\Helper\CoroutineStarter.cs" />
+    <Compile Include="Assets\Scripts\Helper\Formatter.cs" />
     <Compile Include="Assets\Scripts\House.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Managers\CharacterSprites.cs" />
     <Compile Include="Assets\Scripts\Managers\CharactersDatabase.cs" />
     <Compile Include="Assets\Scripts\Managers\DailyEventManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\FlowchartHandler.cs" />
+    <Compile Include="Assets\Scripts\Managers\FlowchartSceneManager.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\LoadingViewManager.cs" />
     <Compile Include="Assets\Scripts\Network\INetwork.cs" />
@@ -583,9 +579,9 @@
     <Compile Include="Assets\Scripts\UI\PopupManager.cs" />
     <Compile Include="Assets\Scripts\UI\ScreenManagement.cs" />
     <Compile Include="Assets\Scripts\UI\VillageView.cs" />
-    <Compile Include="Assets\Scripts\spreadsheetTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Flowchart Readme.txt" />
     <None Include="Assets\Fungus\Docs\CHANGELOG.txt" />
     <None Include="Assets\Fungus\Docs\LICENSE.txt" />
     <None Include="Assets\Fungus\Docs\README.txt" />

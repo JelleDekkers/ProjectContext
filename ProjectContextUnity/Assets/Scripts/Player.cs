@@ -17,6 +17,13 @@ public class Player {
     public int Gender;
     public List<int> allPlayerChars;
     public int GameState = -1;
+    public int Money;
+    public int Health;
+    /// <summary>
+    /// Nederlands of Duits
+    /// </summary>
+    public int Status;
+    public string CurrentFlowChartBlock = "Start";
 
     private static string fileName = "gameData";
     private static string filePath = "/" + fileName + ".gd";

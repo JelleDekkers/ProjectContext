@@ -10,7 +10,7 @@ public class FlowchartHandler : MonoBehaviour {
     [SerializeField]
     private GameObject menuDialog;
 
-    private Flowchart flowChart;
+    private Flowchart flowchart;
     private string nextBlockName = "Start";
     private bool NewEvent = false;
 
@@ -21,30 +21,39 @@ public class FlowchartHandler : MonoBehaviour {
 
     void Awake() {
         instance = this;
+    }
+
+    public void SetFlowChart(int charId) {
         Flowchart[] flowcharts = GetComponentsInChildren<Flowchart>();
-        flowChart = flowcharts[0];
-        //character = GetComponent<CharacterTest>();
-        //flowChart.SetIntegerVariable("Money", character.Money);
+        flowchart = flowcharts[charId];
+        flowchart.SetIntegerVariable("Money", Player.Instance.Money);
+        flowchart.SetIntegerVariable("Health", Player.Instance.Health);
+        flowchart.SetIntegerVariable("Status", Player.Instance.Status);
+        nextBlockName = Player.Instance.CurrentFlowChartBlock;
     }
 
     public void UpdateVariables() {
-        //character.Money = flowChart.GetIntegerVariable("Money");
-        //character.HealthPoints = flowChart.GetIntegerVariable("HealthPoints");
+        Player.Instance.Money = flowchart.GetIntegerVariable("Money");
+        Player.Instance.Health = flowchart.GetIntegerVariable("Health");
+        Player.Instance.Status = flowchart.GetIntegerVariable("Status");
+        Player.Instance.SaveData();
     }
 
     public void StartNewEvent() {
         NewEvent = true;
         sayDialog.gameObject.SetActive(true);
         menuDialog.gameObject.SetActive(true);
-        flowChart.ExecuteBlock(nextBlockName);
+        flowchart.ExecuteBlock(nextBlockName);
     }
 
     public void NewBlockEvent() {
         if (NewEvent) {
             NewEvent = false;
         } else {
-            nextBlockName = flowChart.GetExecutingBlocks()[1].BlockName;
-            flowChart.StopAllBlocks();
+            nextBlockName = flowchart.GetExecutingBlocks()[1].BlockName;
+            Player.Instance.CurrentFlowChartBlock = nextBlockName;
+            Player.Instance.SaveData();
+            flowchart.StopAllBlocks();
         }
     }
 }

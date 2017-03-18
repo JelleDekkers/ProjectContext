@@ -1,15 +1,12 @@
 DOING:
 
-opslaan van laatste event block name en loaden
-onderscheiden van flowcharts voor verschillende karakters
-
-outline voor klikbare huizen nog doen
 
 host/client game scherm maken
 client zoals het nu is
 
 
-loading view doesnt work in builds?
+outline voor klikbare huizen nog doen
+dorp aanpassen met nieuwe huizen
 
 village view maken met scrollen, pinchen (inzoomen) en draggen tot aan de grens
 
