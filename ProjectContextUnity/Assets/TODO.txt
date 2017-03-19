@@ -1,8 +1,6 @@
 DOING:
 
-dorp aanpassen met nieuwe huizen
-
-outline voor klikbare huizen 
+android testen, klikbare elementen + outline material
 
 wachten op docent scherm werkt niet altijd?
 
@@ -10,6 +8,7 @@ server code werkt niet goed? vanwege gameprefs?
 
 village view maken met scrollen, pinchen (inzoomen) en draggen tot aan de grens
 
+correcte datum bij event en bij village info
 
 
 host:

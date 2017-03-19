@@ -18,6 +18,8 @@ public class VillageView : MonoBehaviour {
     private GridLayoutGroup healthGroup;
     [SerializeField]
     private Image healthIcon;
+    [SerializeField]
+    private Material outlineMat;
 
     private House selectedHouse;
 
@@ -35,7 +37,12 @@ public class VillageView : MonoBehaviour {
             houses[i].GetComponent<House>().enabled = true;
             houses[i].CharacterIndex = characters[i];
             houses[i].SetPlayerIndex();
+            ApplyOutlineMaterial(houses[i].gameObject.GetComponent<SpriteRenderer>());
         }
+    }
+
+    private void ApplyOutlineMaterial(SpriteRenderer rend) {
+        rend.material = outlineMat;
     }
 
     public void SelectHouse(House house) {
