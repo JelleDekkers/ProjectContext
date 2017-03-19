@@ -15,10 +15,9 @@ public class ScreenManagement : MonoBehaviour {
         CharacterView.Instance.UpdateInfo();
         CharacterView.Instance.viewObject.SetActive(true);
         VillageView.Instance.viewObject.SetActive(false);
-
     }
 
-    public void CloseCharacaterView() {
+    public void CloseCharacterView() {
         CharacterView.Instance.viewObject.SetActive(false);
         VillageView.Instance.viewObject.SetActive(true);
     }

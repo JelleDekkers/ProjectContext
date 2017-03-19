@@ -19,7 +19,7 @@ public class HouseInfoPanel : MonoBehaviour {
 
     public bool IsActive { get; private set; }
 
-    private void Start() {
+    private void Awake() {
         instance = this;
     }
 

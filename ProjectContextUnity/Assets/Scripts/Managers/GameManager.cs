@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour {
     public ServerData server;
     public bool ShowDebugOptions = false;
 
+    [SerializeField]
+    private Canvas studentCanvas;
+    [SerializeField]
+    private Canvas teacherCanvas;
+
     private void Start() {
         if (!Network.isServer) {
             player = new Player();
@@ -56,14 +61,14 @@ public class GameManager : MonoBehaviour {
                 FlowchartHandler.Instance.SetFlowChart(player.CharacterID);
             }
         }
-    }
 
-    private void Update() {
-        //waiting for connection:
-        //if (Network.peerType == NetworkPeerType.Client) {
-        //    print("is client");
-        //    //NetworkManager.networkView.RPC("StartGame", RPCMode.All);
-        //}
+        if(GameVersion.Instance.Version == Version.Teacher) {
+            teacherCanvas.gameObject.SetActive(true);
+            studentCanvas.gameObject.SetActive(false);
+        } else {
+            teacherCanvas.gameObject.SetActive(false);
+            studentCanvas.gameObject.SetActive(true);
+        }
     }
 
     private void OnGUI() {
@@ -144,6 +149,7 @@ public class GameManager : MonoBehaviour {
                 if (player.ConnectionStatus == (int)ConnectionStatus.Online) {
                     player.ConnectionStatus = (int)ConnectionStatus.Offline;
                     server.SaveData();
+                    PlayerList.Instance.UpdateList(server.players);
                     yield return null;
                 }
             }
@@ -161,6 +167,8 @@ public class GameManager : MonoBehaviour {
                 }
             }
         }
+
+        PlayerList.Instance.UpdateList(server.players);
     }
 
     [RPC]
@@ -183,6 +191,7 @@ public class GameManager : MonoBehaviour {
         }
 
         server.SaveData();
+        PlayerList.Instance.UpdateList(server.players);
     }
 
     [RPC]
@@ -191,8 +200,7 @@ public class GameManager : MonoBehaviour {
         player.SaveData();
     }
 
-
-    private void TriggerNextDay() {
+    public void TriggerNextDay() {
         if(server.GameState == (int)GameState.Day5) {
             print("final state reached"); // show game over/scores
             return;
@@ -247,6 +255,8 @@ public class GameManager : MonoBehaviour {
                 }
             }
         }
+
+        PlayerList.Instance.UpdateList(server.players);
     }
 
     [RPC]

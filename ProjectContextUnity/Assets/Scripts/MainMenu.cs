@@ -98,6 +98,7 @@ public class MainMenu : MonoBehaviour {
         LoadingViewManager.Instance.Show("Starting Server");
 
         if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork) {
+            print(serverCode);
             GamePrefs.SaveServerCode(serverCode);
             NetworkManager.serverCode = serverCode;
             NetworkManager.CreateServer();
