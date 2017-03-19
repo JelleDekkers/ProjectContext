@@ -18,7 +18,7 @@ public class Player {
     public List<int> allPlayerChars;
     public int GameState = -1;
     public int Money;
-    public int Health;
+    public int Health = 3;
     /// <summary>
     /// Nederlands of Duits
     /// </summary>

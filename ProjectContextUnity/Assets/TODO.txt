@@ -1,15 +1,15 @@
 DOING:
 
+dorp aanpassen met nieuwe huizen
+
+outline voor klikbare huizen 
 
 wachten op docent scherm werkt niet altijd?
 
-outline voor klikbare huizen nog doen
-dorp aanpassen met nieuwe huizen
+server code werkt niet goed? vanwege gameprefs?
 
 village view maken met scrollen, pinchen (inzoomen) en draggen tot aan de grens
 
-
-healthpoints aanpassen adhv flowchart variables
 
 
 host:

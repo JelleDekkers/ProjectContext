@@ -18,6 +18,10 @@ public class CharacterView : MonoBehaviour {
     private Image characterImage;
     [SerializeField]
     private Text money;
+    [SerializeField]
+    private GridLayoutGroup healthGroup;
+    [SerializeField]
+    private Image healthIcon;
 
     private void Awake() {
         instance = this;
@@ -35,6 +39,16 @@ public class CharacterView : MonoBehaviour {
         if (character == null)
             SetCharacter(CharactersDatabase.Instance.Data.dataArray[Player.Instance.CharacterID]);
 
-        //money.text = Player.Instance.Money.ToString();
+        // health:
+        Image[] icons = healthGroup.transform.GetComponentsInChildren<Image>();
+        foreach (Image s in icons)
+            Destroy(s.gameObject);
+
+        for(int i = 0; i < Player.Instance.Health; i++) {
+            Image img = Instantiate(healthIcon);
+            img.transform.SetParent(healthGroup.transform);
+        }
+
+        money.text = Player.Instance.Money.ToString();
     }
 }

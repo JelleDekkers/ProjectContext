@@ -37,6 +37,8 @@ public class FlowchartHandler : MonoBehaviour {
         Player.Instance.Health = flowchart.GetIntegerVariable("Health");
         Player.Instance.Status = flowchart.GetIntegerVariable("Status");
         Player.Instance.SaveData();
+        VillageView.Instance.UpdateInfo();
+        CharacterView.Instance.UpdateInfo();
     }
 
     public void StartNewEvent() {

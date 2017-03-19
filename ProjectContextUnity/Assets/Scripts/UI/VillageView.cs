@@ -14,6 +14,10 @@ public class VillageView : MonoBehaviour {
     private Transform housesParent;
     [SerializeField]
     private Image characterImage;
+    [SerializeField]
+    private GridLayoutGroup healthGroup;
+    [SerializeField]
+    private Image healthIcon;
 
     private House selectedHouse;
 
@@ -41,5 +45,17 @@ public class VillageView : MonoBehaviour {
 
     public void DeselectHouse() {
         selectedHouse = null;
+    }
+
+    public void UpdateInfo() {
+        // health:
+        Image[] icons = healthGroup.transform.GetComponentsInChildren<Image>();
+        foreach (Image s in icons)
+            Destroy(s.gameObject);
+
+        for (int i = 0; i < Player.Instance.Health; i++) {
+            Image img = Instantiate(healthIcon);
+            img.transform.SetParent(healthGroup.transform);
+        }
     }
 }
