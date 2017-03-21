@@ -54,6 +54,10 @@ public class Player {
         }
     }
 
+    public void SetInstance() {
+        instance = this;
+    }
+
     public static void DeleteData() {
         File.Delete(Application.persistentDataPath + filePath);
     }

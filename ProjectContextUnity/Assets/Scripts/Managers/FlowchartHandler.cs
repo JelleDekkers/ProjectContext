@@ -26,6 +26,7 @@ public class FlowchartHandler : MonoBehaviour {
     public void SetFlowChart(int charId) {
         Flowchart[] flowcharts = GetComponentsInChildren<Flowchart>();
         flowchart = flowcharts[charId];
+        print(Player.Instance);
         flowchart.SetIntegerVariable("Money", Player.Instance.Money);
         flowchart.SetIntegerVariable("Health", Player.Instance.Health);
         flowchart.SetIntegerVariable("Status", Player.Instance.Status);
