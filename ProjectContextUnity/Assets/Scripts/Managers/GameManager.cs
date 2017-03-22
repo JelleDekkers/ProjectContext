@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour {
             player = new Player();
             if (Player.FileExists() == false) {
                 player.Name = GamePrefs.Name;
+                if (player.Name == null)
+                    player.Name = "";
                 player.SaveData();
             } else {
                 player = player.LoadData();
@@ -60,6 +62,8 @@ public class GameManager : MonoBehaviour {
                 VillageView.Instance.SetupCharacterButton(player.CharacterID);
                 FlowchartHandler.Instance.SetFlowChart(player.CharacterID);
             }
+
+            GameDate.Instance.SetDate(player.Date);
         }
 
         if(GameVersion.Instance.Version == Version.Teacher) {
@@ -76,6 +80,10 @@ public class GameManager : MonoBehaviour {
 
         if (!ShowDebugOptions)
             return;
+
+        if (Network.connections.Length >= 1) {
+            GUI.Label(new Rect(Screen.width - 100, 10, 100, 20), "Ping: " + Network.GetAveragePing(Network.connections[0]));
+        }
 
         GUI.Label(new Rect(10, 10, 1000, 20), "Is host: " + NetworkManager.IsHost);
         GUI.Label(new Rect(10, 20, 1000, 20), "Server Code: " + NetworkManager.serverCode);
@@ -128,7 +136,7 @@ public class GameManager : MonoBehaviour {
     private void OnConnectedToServer() {
         if (!Network.isServer) 
             NetworkManager.networkView.RPC("PlayerConnected", RPCMode.Server, player.ID, player.Name, player.Gender, player.CharacterID);
-        
+     
         NetworkManager.OnConnectedToServerEvent -= OnConnectedToServer;
     }
 
@@ -201,16 +209,12 @@ public class GameManager : MonoBehaviour {
     }
 
     public void TriggerNextDay() {
-        if(server.GameState == (int)GameState.Day5) {
-            print("final state reached"); // show game over/scores
-            return;
-        }
-
-        if (server.GameState == (int)GameState.ServerStart) {
+        if (server.GameState == (int)GameState.ServerStart) 
             DistributeCharsAmongstPlayers();
-        } else {
+        else if(server.GameState == (int)GameState.Day6) 
+                NetworkManager.networkView.RPC("ShowFinalStats", RPCMode.Others);
+        else
             NetworkManager.networkView.RPC("NextDayRPC", RPCMode.Others, server.GameState + 1);
-        }
 
         server.GameState++;
         server.SaveData();
@@ -279,7 +283,6 @@ public class GameManager : MonoBehaviour {
     private void SetVillageHouses(List<int> list) {
         player.allPlayerChars = list;
         player.SaveData();
-        print("players count: " + list.Count);
         VillageView.Instance.AssignHouses(list);
     }
 
@@ -292,5 +295,10 @@ public class GameManager : MonoBehaviour {
     [RPC]
     private void NextDayRPC(int newDayIndex) {
         DailyEventManager.Instance.StartDailyEvent(newDayIndex - 1); // -1 omdat de index van newsEvents begint op 0 maar gameState bij 1
+    }
+
+    [RPC]
+    private void ShowFinalStats() {
+        StatusView.Instance.Show();
     }
 }

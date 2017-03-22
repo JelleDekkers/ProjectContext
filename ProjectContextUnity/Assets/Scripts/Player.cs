@@ -17,13 +17,14 @@ public class Player {
     public int Gender;
     public List<int> allPlayerChars;
     public int GameState = -1;
-    public int Money;
+    public int Money = 3;
     public int Health = 3;
     /// <summary>
     /// Nederlands of Duits
     /// </summary>
-    public int Status;
+    public int Status = 0;
     public string CurrentFlowChartBlock = "Start";
+    public string Date = "20 februari 1940";
 
     private static string fileName = "gameData";
     private static string filePath = "/" + fileName + ".gd";

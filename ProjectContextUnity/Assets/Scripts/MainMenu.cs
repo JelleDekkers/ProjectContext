@@ -7,7 +7,9 @@ public class MainMenu : MonoBehaviour {
     [SerializeField]
     private InputField nameInputField;
     [SerializeField]
-    private InputField serverCodeInputField;
+    private InputField serverCodeInputFieldClient;
+    [SerializeField]
+    private InputField serverCodeInputFieldHost;
     [SerializeField]
     private Canvas clientMenu;
     [SerializeField]
@@ -20,7 +22,6 @@ public class MainMenu : MonoBehaviour {
     private int serversFoundCount { get { return UDPServerDiscovery.foundLocalServers.Count; } }
     private string[] genders = new string[] { "Man", "Vrouw" };
     private int playerGender = 0;
-    private bool isStudentVersion = true;
 
     public bool ShowDebugOptions = false;
 
@@ -29,8 +30,13 @@ public class MainMenu : MonoBehaviour {
         Screen.orientation = ScreenOrientation.Portrait;
         GamePrefs.LoadData();
 
-        if (GameVersion.Instance.Version == Version.Student)
+        if (GameVersion.Instance.Version == Version.Student) {
             hostMenu.gameObject.SetActive(false);
+            clientMenu.gameObject.SetActive(true);
+        } else {
+            hostMenu.gameObject.SetActive(true);
+            clientMenu.gameObject.SetActive(false);
+        }
     }
 
     private void Start() {
@@ -40,12 +46,13 @@ public class MainMenu : MonoBehaviour {
         playerGender = GamePrefs.Gender;
 
         nameInputField.text = playerName;
-        serverCodeInputField.text = serverCode;
+        serverCodeInputFieldClient.text = serverCode;
+        serverCodeInputFieldHost.text = serverCode;
     }
 
     private void Update() {
         playerName = nameInputField.text;
-        serverCode = serverCodeInputField.text;
+        serverCode = serverCodeInputFieldClient.text;
     }
 
     private void OnGUI() {
@@ -53,13 +60,16 @@ public class MainMenu : MonoBehaviour {
         if (!ShowDebugOptions)
             return;
 
-        isStudentVersion = GUI.Toggle(new Rect(10, 10, 1000, 100), isStudentVersion, " Student Game Version");
-        if (isStudentVersion) {
-            GameVersion.Instance.Version = Version.Student;
-            hostMenu.gameObject.SetActive(false);
-        } else {
-            GameVersion.Instance.Version = Version.Teacher;
-            hostMenu.gameObject.SetActive(true);
+        if(GUI.Button(new Rect(10, 10, 200, 20), " Switch Game Version")) {
+            if (GameVersion.Instance.Version == Version.Student) {
+                GameVersion.Instance.Version = Version.Teacher;
+                hostMenu.gameObject.SetActive(true);
+                clientMenu.gameObject.SetActive(false);
+            } else {
+                GameVersion.Instance.Version = Version.Student;
+                hostMenu.gameObject.SetActive(false);
+                clientMenu.gameObject.SetActive(true);
+            }
         }
 
         GUI.Label(new Rect(10, 40, 1000, 20), "Network reachability: " + Application.internetReachability);
@@ -78,8 +88,10 @@ public class MainMenu : MonoBehaviour {
         GUI.Label(new Rect(10, 180, 300, 20), "Enter your name: ");
         playerName = GUI.TextField(new Rect(10, 200, 100, 40), playerName);
         playerGender = GUI.Toolbar(new Rect(120, 200, 100, 40), playerGender, genders);
-        if (GUI.Button(new Rect(10, 250, 100, 40), "Save"))
-            SavePlayerInfo();
+        if (GUI.Button(new Rect(10, 250, 100, 40), "Save")) {
+            GamePrefs.SaveName(playerName);
+            GamePrefs.SaveGender((Gender)playerGender);
+        }
 
         if (GUI.Button(new Rect(10, 350, 200, 40), "Delete PlayerPrefs"))
             PlayerPrefs.DeleteAll();
@@ -95,10 +107,11 @@ public class MainMenu : MonoBehaviour {
         //    return;
         //}
 
+        GamePrefs.SaveServerCode(serverCode);
         LoadingViewManager.Instance.Show("Starting Server");
 
         if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork) {
-            print(serverCode);
+            print("server code: " + serverCode);
             GamePrefs.SaveServerCode(serverCode);
             NetworkManager.serverCode = serverCode;
             NetworkManager.CreateServer();
@@ -109,7 +122,9 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void GetServersAndConnect() {
-        SavePlayerInfo();
+        GamePrefs.SaveName(playerName);
+        GamePrefs.SaveGender((Gender)playerGender);
+
         LoadingViewManager.Instance.Show("Joining Server");
         UDPServerDiscovery.SearchForServers();
         UDPServerDiscovery.OnFinishedLookingForServers += LoadingViewManager.Instance.Hide;
@@ -123,26 +138,16 @@ public class MainMenu : MonoBehaviour {
         //}
         GamePrefs.SaveServerCode(clientCode);
         foreach (GameServer server in UDPServerDiscovery.foundLocalServers) {
-            if (server.Code.ToLower() == clientCode.ToLower()) {
+            //if (server.Code.ToLower() == clientCode.ToLower()) {
                 UDPServerDiscovery.OnFinishedLookingForServers -= LoadingViewManager.Instance.Hide;
                 UDPServerDiscovery.OnFinishedLookingForServers -= ConnectToServerByCode;
                 NetworkManager.ConnectToServer(server.IpAddress);
                 SceneManager.LoadScene("game");
                 return;
-            }
+            //}
         }
         UDPServerDiscovery.OnFinishedLookingForServers -= LoadingViewManager.Instance.Hide;
         UDPServerDiscovery.OnFinishedLookingForServers -= ConnectToServerByCode;
         PopupManager.Instance.ShowPopup("Error", "No server found with corresponding code");
-    }
-
-    private void SavePlayerInfo() {
-        //if(!Common.IsValidName(playerName)) {
-        //    PopupManager.Instance.ShowPopup("Error", "Please enter a valid name");
-        //    return;
-        //}
-
-        GamePrefs.SaveName(playerName);
-        GamePrefs.SaveGender((Gender)playerGender);
     }
 }

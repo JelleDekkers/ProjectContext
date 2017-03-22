@@ -13,10 +13,10 @@ public class DailyEventManager : MonoBehaviour {
     private Text newsPaperDate;
 
     public DailyEvent[] Events = new DailyEvent[] {
-        new DailyEvent("Duitsland valt aan!",       "14 mei 1940"),
-        new DailyEvent("Razzia's naar Joden",       "20 september 1941"),
-        new DailyEvent("Avondklok gaat in",         "1 novemeber 1942"),
-        new DailyEvent("Hongerwinter slaat toe!",   "2 januari 1943"),
+        new DailyEvent("Duitsland valt aan!",       "10 mei 1940"),
+        new DailyEvent("Razzia's naar Joden",       "14 juli 1942"),
+        new DailyEvent("Avondklok gaat in",         "1 mei 1943"),
+        new DailyEvent("Hongerwinter slaat toe!",   "20 oktober 1944"),
         new DailyEvent("Nederland bevrijdt!",       "14 mei 1945")
     };
 
@@ -31,6 +31,9 @@ public class DailyEventManager : MonoBehaviour {
         newsPaperCanvas.gameObject.SetActive(true);
         newsText.text = Events[index].Event;
         newsPaperDate.text = Events[index].Date;
+        GameDate.Instance.SetDate(Events[index].Date);
+        Player.Instance.Date = Events[index].Date;
+        Player.Instance.SaveData();
     }
 
     public void CloseNewsPaper() {

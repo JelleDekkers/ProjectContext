@@ -1,32 +1,12 @@
 DOING:
 
-android testen, klikbare elementen + outline material
+kan niet connecten met host? gaat fout bij de server code comparen
 
-wachten op docent scherm werkt niet altijd?
-
-server code werkt niet goed? vanwege gameprefs?
-
+eindscore scherm docent top 10 spelers status
 village view maken met scrollen, pinchen (inzoomen) en draggen tot aan de grens
 
-correcte datum bij event en bij village info
+qr code app installer
 
-
-host:
-lijst aan spelers
-	per speler:
-	id
-	on/offline
-	portrait
-	naam
-
-knop volgende dag + info wat de volgende gebeurtenis is
-
-server code tekst
-dag nummer tekst
-
-
-
-eindscore scherm top 10?
 
 
 TODO:

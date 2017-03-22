@@ -8,6 +8,9 @@ public class SelectHouse : MonoBehaviour {
     private Collider2D hitCol;
 
 	void Update () {
+        if (GameVersion.Instance.Version == Version.Teacher)
+            return;
+
         if (HouseInfoPanel.Instance.IsActive)
             return;
 

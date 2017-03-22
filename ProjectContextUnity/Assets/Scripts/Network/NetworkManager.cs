@@ -64,12 +64,6 @@ public class NetworkManager : MonoBehaviour {
         }
     }
 
-    private void OnGUI() {
-        if (Network.connections.Length >= 1) {
-            GUI.Label(new Rect(Screen.width - 100, 10, 100, 20), "Ping: " + Network.GetAveragePing(Network.connections[0]));
-        }
-    }
-
     private void OnDestroy() {
         network.OnDestroyEvent();
     }

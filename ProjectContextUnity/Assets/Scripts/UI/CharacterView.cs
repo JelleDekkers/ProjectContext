@@ -17,7 +17,9 @@ public class CharacterView : MonoBehaviour {
     [SerializeField]
     private Image characterImage;
     [SerializeField]
-    private Text money;
+    private GridLayoutGroup moneyGroup;
+    [SerializeField]
+    private Image moneyIcon;
     [SerializeField]
     private GridLayoutGroup healthGroup;
     [SerializeField]
@@ -49,6 +51,15 @@ public class CharacterView : MonoBehaviour {
             img.transform.SetParent(healthGroup.transform);
         }
 
-        money.text = Player.Instance.Money.ToString();
+        // money:
+        icons = moneyGroup.transform.GetComponentsInChildren<Image>();
+        foreach (Image s in icons)
+            Destroy(s.gameObject);
+
+        for (int i = 0; i < Player.Instance.Money; i++) {
+            Image img = Instantiate(moneyIcon);
+            img.transform.SetParent(moneyGroup.transform);
+        }
+
     }
 }

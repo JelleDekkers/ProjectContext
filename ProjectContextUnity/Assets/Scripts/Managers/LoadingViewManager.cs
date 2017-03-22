@@ -18,7 +18,7 @@ public class LoadingViewManager : MonoBehaviour {
     private float iconRotationSpeed = 200;
     private Canvas canvas;
 
-	void Start () {
+	void Awake () {
         instance = this;
         canvas = GetComponent<Canvas>();
 	}
