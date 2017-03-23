@@ -1,15 +1,24 @@
-DOING:
+Doing:
 
-kan niet connecten met host? gaat fout bij de server code comparen
+TODO:
+film materiaal
+docent scherm
+5 karakters
+dorp
+gebeurtenis krant
+keuze menu 
+eindscherm met nederlands, duits, neutraal
 
-eindscore scherm docent top 10 spelers status
-village view maken met scrollen, pinchen (inzoomen) en draggen tot aan de grens
 
 qr code app installer
 
 
 
-TODO:
+
+
+Nice to Have:
+
+eindscore scherm docent top 10 spelers status
 
 code opschonen, onderscheid maken tussen game menu en game manager code
 

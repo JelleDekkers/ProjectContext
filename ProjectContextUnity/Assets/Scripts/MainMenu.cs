@@ -52,7 +52,8 @@ public class MainMenu : MonoBehaviour {
 
     private void Update() {
         playerName = nameInputField.text;
-        serverCode = serverCodeInputFieldClient.text;
+        serverCode = serverCodeInputFieldHost.text;
+        clientCode = serverCodeInputFieldClient.text;
     }
 
     private void OnGUI() {
@@ -132,19 +133,16 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void ConnectToServerByCode() {
-        //if (clientCode == "") {
-        //    print("Please enter a code");
-        //    return;
-        //}
         GamePrefs.SaveServerCode(clientCode);
         foreach (GameServer server in UDPServerDiscovery.foundLocalServers) {
-            //if (server.Code.ToLower() == clientCode.ToLower()) {
+            print("server code: " + server.Code.ToLower() + " clientCode: " + clientCode.ToLower() + " == " + (server.Code.ToLower() == clientCode.ToLower()));
+            if (server.Code.ToLower() == clientCode.ToLower()) {
                 UDPServerDiscovery.OnFinishedLookingForServers -= LoadingViewManager.Instance.Hide;
                 UDPServerDiscovery.OnFinishedLookingForServers -= ConnectToServerByCode;
                 NetworkManager.ConnectToServer(server.IpAddress);
                 SceneManager.LoadScene("game");
                 return;
-            //}
+            }
         }
         UDPServerDiscovery.OnFinishedLookingForServers -= LoadingViewManager.Instance.Hide;
         UDPServerDiscovery.OnFinishedLookingForServers -= ConnectToServerByCode;
